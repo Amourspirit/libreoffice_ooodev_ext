@@ -1,0 +1,54 @@
+[tool.poetry]
+name = "libreoffice python template"
+version = "0.1.0"
+description = "Template for creating python projects for LibreOffice"
+authors = ["My Name <myemail@address.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [
+    { include = "app" }
+]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+ooouno = "^2.1.2"
+ooo-dev-tools = "^0.11.15"
+
+
+[tool.poetry.group.dev.dependencies]
+types-scriptforge = ">=2.0.1"
+pytest = "^7.4.0"
+pytest-dotenv = "^0.5.2"
+black = "^23.7.0"
+oooscript = "^1.1.3"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.ruff]
+extended-select=["ANN", "C4", "N", "SIM", "TCH"]
+ignore=[]
+show-fixes=true
+target="py37"
+
+[tool.pylint.'MESSAGES CONTROL']
+max-line-length = 120
+disable = """
+    no-name-in-module,
+    no-self-argument
+"""
+
+[tool.pyright]
+include = ["src"]
+reportMissingModuleSource = false
+
+[tool.pytest.ini_options]
+testpaths = [
+    "tests",
+]
+markers = [
+    "skip_headless: skips a test in headless mode",
+    "skip_not_headless_os: skips a test in GUI mode for give os"
+]
