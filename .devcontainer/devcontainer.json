@@ -48,7 +48,9 @@
 				"ms-vscode.test-adapter-converter",
 				"Phu1237.vs-browser",
 				"streetsidesoftware.code-spell-checker",
-				"bungcip.better-toml"
+				"bungcip.better-toml",
+				"adamraichu.zip-viewer",
+				"redhat.vscode-xml"
 			],
 			// Adds VS Code settings.json values into the environment.
 			"settings": {
