@@ -1,3 +1,48 @@
+<p align="center">
+<img src="https://user-images.githubusercontent.com/4193389/260558706-6a975af5-0815-4d85-987a-6f8b3ff20609.png" alt="OooDev Logo" width="174" height="174">
+</p>
+
+# OooDev LibreOffice Python Extension
+
+This project brings to power of [OOO Development Tools] (OooDev) to LibreOffice as an extension.
+
+[OOO Development Tools] can be [pip installed](https://pypi.org/project/ooo-dev-tools/) or [compiled into a macro](https://oooscript.readthedocs.io/en/latest/); However, this can be cumbersome.
+
+By installing this extension you can have the power of [OOO Development Tools] at your fingertips with no extra need to pip install or compile into a macro.
+
+The extension can be found in the [dist](dist) folder.
+
+<details>
+<summary>Develop Notes</summary>
+
+## Development
+
+To update the extension from the development container, run the following command:
+
+```bash
+poetry update
+```
+
+This command will install the latest verssion of [OOO Development Tools].
+
+Edit the `pyproject.toml` file and update the version number.
+
+Then run the following command:
+
+
+```bash
+python -m app build
+```
+
+This command will build the extension and place it in the [dist](dist) folder. The build command also will automatically update the `dist/ooodev.ext.update.xml`. That's it. You can now install the extension.
+
+</details>
+
+This project is based upon the [Live LibreOffice Python](https://github.com/Amourspirit/live-libreoffice-python) template. Beleow is the original readme from the template.
+
+<details>
+<summary>Original Template Readme</summary>
+
 # Live LibreOffice Python
 
 Live LibreOffice Python is a complete development environment for creating, debugging and testing python scripts. It leverages the power of [VS Code] and has [LibreOffice] baked in that can be access via the internal web browser or via your local web browser which allows for a much more pleasant and consistent debugging experience.
@@ -18,8 +63,11 @@ This templated can also be leveraged to demonstrate working examples of code.
 
 See the [Getting Started](https://github.com/Amourspirit/live-libreoffice-python/wiki/Getting-Started) in the [Wiki](https://github.com/Amourspirit/live-libreoffice-python/wiki).
 
+</details>
+
 [VS Code]:https://code.visualstudio.com/
 
 [LibreOffice]:https://www.libreoffice.org/
 [GitHub CLI/CD]:https://resources.github.com/ci-cd/
 [LibreOffice Python UNO Examples]:https://github.com/Amourspirit/python-ooouno-ex
+[OOO Development Tools]: https://python-ooo-dev-tools.readthedocs.io/en/main/index.html

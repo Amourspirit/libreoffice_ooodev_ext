@@ -82,7 +82,7 @@ RUN  /usr/bin/pip install "poetry==$POETRY_VERSION" \
     /usr/bin/pip install --no-cache-dir -r "$CONFIG_DIR/.tmp/res/req/requirements.txt"; fi
 
 WORKDIR /workspace/ooodev_py_ext
-COPY ./pyproject.toml ./poetry.lock ./
+COPY ./*.toml ./*.lock ./
 RUN poetry config virtualenvs.in-project true \
     && poetry install $(test "$RUN_ENV" == production && echo "--no-dev") --no-interaction --no-ansi --no-root --no-cache \
     && sed -i "s/include-system-site-packages = false/include-system-site-packages = false/g" /workspace/ooodev_py_ext/.venv/pyvenv.cfg
