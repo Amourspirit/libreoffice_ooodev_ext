@@ -1,7 +1,7 @@
 version: "3.9"
 
 services:
-  libreoffice_app:
+  ooodev_ext:
     env_file: .env
     network_mode: "bridge"
     # env_file: user.env
@@ -12,7 +12,7 @@ services:
         LO_VERSION: "7.5.5"
         CONFIG_DIR: /config
     # user: root
-    container_name: libreoffice_app
+    container_name: ooodev_ext
     security_opt:
       - seccomp:unconfined #optional
     environment:
@@ -21,11 +21,11 @@ services:
       - PGID=0
       - CONFIG_DIR=/config
       - DEV_CONTAINER=1
-      - WORK_DIR=/workspace/libreoffice_python_app
+      - WORK_DIR=/workspace/ooodev_py_ext
     volumes:
       - type: bind
         source: ../
-        target: /workspace/libreoffice_python_app
+        target: /workspace/ooodev_py_ext
       - type: bind
         source: ../Documents
         target: /config/Documents
@@ -37,7 +37,7 @@ services:
         target: /config
       - type: volume
         source: app_virtual_env
-        target: /workspace/libreoffice_python_app/.venv
+        target: /workspace/ooodev_py_ext/.venv
     
     ports:
       - 3002:3000

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<description xmlns="http://openoffice.org/extensions/description/2006"
+    xmlns:dep="http://openoffice.org/extensions/description/2006"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+    <identifier value="org.openoffice.extensions.ooodev" />
+
+    <version value="@version@" />
+    <platform value="all"/>
+
+    <update-information>
+        <src xlink:href="@update_url@" />
+    </update-information>
+
+    <extension-description>
+        <src xlink:href="pkg-desc/descr-en.txt" lang="en" />
+        <src xlink:href="pkg-desc/descr-de.txt" lang="de" />
+        <src xlink:href="pkg-desc/descr-fr.txt" lang="fr" />
+        <src xlink:href="pkg-desc/descr-es.txt" lang="es" />
+    </extension-description>
+
+    <icon>
+        <default xlink:href="icons/icon.png" />
+    </icon>
+
+    <dependencies>
+        <!-- <l:LibreOffice-minimal-version value="7.0"
+            dep:name="LibreOffice 7.0 minimum, or more recent" /> -->
+    </dependencies>
+
+    <display-name>
+        <name lang="en">OOO Development Tools</name>
+        <name lang="de">OOO-Entwicklungstools</name>
+        <name lang="fr">Outils de développement OOO</name>
+        <name lang="es">Herramientas de desarrollo OOO</name>
+    </display-name>
+
+    <registration>
+        <simple-license accept-by="user" suppress-on-update="true">
+            <license-text xlink:href="LICENSE-en.txt" lang="en" />
+        </simple-license>
+    </registration>
+    <publisher>
+        <name lang="en" xlink:href="@publisher_url@">@publisher@</name>
+        <name lang="de" xlink:href="@publisher_url@">@publisher@</name>
+        <name lang="fr" xlink:href="@publisher_url@">@publisher@</name>
+        <name lang="es" xlink:href="@publisher_url@">@publisher@</name>
+    </publisher>
+
+</description>

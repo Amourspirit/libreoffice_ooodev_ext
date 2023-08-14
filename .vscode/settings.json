@@ -234,6 +234,7 @@
         "proto",
         "psutil",
         "PYPI",
+        "pythonloader",
         "PYTHONPATH",
         "pyuno",
         "pyunointerface",
