@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<description xmlns="http://openoffice.org/extensions/description/2006"
+    xmlns:dep="http://openoffice.org/extensions/description/2006"
+    xmlns:l="http://libreoffice.org/extensions/description/2011"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+    <identifier value="org.openoffice.extensions.ooodev" />
+    <version value="0.12.0" />
+    <!-- <dependencies>
+        <l:LibreOffice-minimal-version value="7.0"
+            dep:name="LibreOffice 7.0 minimum, or more recent" />
+    </dependencies> -->
+    <update-download>
+        <src
+            xlink:href="https://github.com/Amourspirit/libreoffice_ooodev_ext/blob/main/dist/OooDev.oxt" />
+    </update-download>
+    <publisher>
+        <name lang="en" xlink:href="https://github.com/Amourspirit/libreoffice_ooodev_ext">AmourSpirit</name>
+        <name lang="de" xlink:href="https://github.com/Amourspirit/libreoffice_ooodev_ext">AmourSpirit</name>
+        <name lang="fr" xlink:href="https://github.com/Amourspirit/libreoffice_ooodev_ext">AmourSpirit</name>
+        <name lang="es" xlink:href="https://github.com/Amourspirit/libreoffice_ooodev_ext">AmourSpirit</name>
+    </publisher>
+</description>

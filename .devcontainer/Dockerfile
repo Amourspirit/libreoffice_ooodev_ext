@@ -85,7 +85,7 @@ WORKDIR /workspace/ooodev_py_ext
 COPY ./pyproject.toml ./poetry.lock ./
 RUN poetry config virtualenvs.in-project true \
     && poetry install $(test "$RUN_ENV" == production && echo "--no-dev") --no-interaction --no-ansi --no-root --no-cache \
-    && sed -i "s/include-system-site-packages = false/include-system-site-packages = true/g" /workspace/ooodev_py_ext/.venv/pyvenv.cfg
+    && sed -i "s/include-system-site-packages = false/include-system-site-packages = false/g" /workspace/ooodev_py_ext/.venv/pyvenv.cfg
 
 # Many of these environment variable are required for python and LibreOffice imports to work correctly.
 # For instance without proper environment vars: from com.sun.star.frame import XComponentLoader # results in error

@@ -1,18 +1,36 @@
+[oxt.metadata]
+build_dir = "build"
+dist_dir = "dist"
+oxt_name = "OooDev"
+token_file_ext = ["txt", "xml", "xcu"]
+py_pkg_names = ["ooodev", "ooo"]
+py_pkg_files = ["typing_extensions.py"]
+update_file = "ooodev.ext.update.xml"
+
+[oxt.token]
+# in the form of "token_name": "token_value"
+# in the files the token will have a prefix and suffix of @
+publisher = "AmourSpirit"
+publisher_url = "https://github.com/Amourspirit/libreoffice_ooodev_ext"
+update_url = "https://github.com/Amourspirit/libreoffice_ooodev_ext/blob/main/@dist_dir@/@oxt_name@.oxt"
+
 [tool.poetry]
-name = "libreoffice python template"
-version = "0.1.0"
+name = "OOO Development Tools Extension"
+version = "0.12.0"
 description = "Template for creating python projects for LibreOffice"
-authors = ["My Name <myemail@address.com>"]
+authors = [
+    ":Barry-Thomas-Paul: Moss <bigbytetech@gmail.com>"
+]
 license = "MIT"
 readme = "README.md"
 packages = [
-    { include = "app" }
+    { include = "src" }
 ]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-ooouno = "^2.1.2"
-ooo-dev-tools = "^0.11.15"
+ooouno = ">=2.1.2"
+ooo-dev-tools = "0.12.0"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -21,6 +39,7 @@ pytest = "^7.4.0"
 pytest-dotenv = "^0.5.2"
 black = "^23.7.0"
 oooscript = "^1.1.3"
+toml = "^0.10.2"
 
 [build-system]
 requires = ["poetry-core"]

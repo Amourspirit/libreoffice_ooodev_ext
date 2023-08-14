@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Extension update file was created by Extension Compiler - version 2.1.2 -->
 <description xmlns="http://openoffice.org/extensions/description/2006"
     xmlns:dep="http://openoffice.org/extensions/description/2006"
     xmlns:l="http://libreoffice.org/extensions/description/2011"
     xmlns:xlink="http://www.w3.org/1999/xlink">
     <identifier value="org.openoffice.extensions.ooodev" />
-    <version value="0.12.0" />
-    <dependencies>
+    <version value="@version@" />
+    <!-- <dependencies>
         <l:LibreOffice-minimal-version value="7.0"
             dep:name="LibreOffice 7.0 minimum, or more recent" />
-    </dependencies>
+    </dependencies> -->
     <update-download>
         <src
-            xlink:href="https://github.com/Amourspirit/libreoffice_ooodev_ext/blob/main/dist/ooodev_ext-0.12.0.oxt" />
+            xlink:href="@update_url@" />
     </update-download>
     <publisher>
-        <name lang="en" xlink:href="https://github.com/Amourspirit">:Barry-Thomas-Paul: Moss</name>
+        <name lang="en" xlink:href="@publisher_url@">@publisher@</name>
+        <name lang="de" xlink:href="@publisher_url@">@publisher@</name>
+        <name lang="fr" xlink:href="@publisher_url@">@publisher@</name>
+        <name lang="es" xlink:href="@publisher_url@">@publisher@</name>
     </publisher>
 </description>
