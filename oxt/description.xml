@@ -8,7 +8,7 @@
     <platform value="all"/>
 
     <update-information>
-        <src xlink:href="@update_url@" />
+        <src xlink:href="@update_url_xml@" />
     </update-information>
 
     <extension-description>

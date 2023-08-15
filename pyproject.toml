@@ -12,7 +12,8 @@ update_file = "ooodev.ext.update.xml"
 # in the files the token will have a prefix and suffix of @
 publisher = "AmourSpirit"
 publisher_url = "https://github.com/Amourspirit/libreoffice_ooodev_ext"
-update_url = "https://github.com/Amourspirit/libreoffice_ooodev_ext/raw/main/@dist_dir@/@oxt_name@.oxt"
+update_url_oxt = "https://raw.githubusercontent.com/Amourspirit/libreoffice_ooodev_ext/main/@dist_dir@/@oxt_name@.oxt"
+update_url_xml = "https://raw.githubusercontent.com/Amourspirit/libreoffice_ooodev_ext/main/@dist_dir@/ooodev.ext.update.xml"
 
 [tool.poetry]
 name = "OOO Development Tools Extension"
