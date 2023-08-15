@@ -11,7 +11,7 @@
     </dependencies> -->
     <update-download>
         <src
-            xlink:href="https://github.com/Amourspirit/libreoffice_ooodev_ext/blob/main/dist/OooDev.oxt" />
+            xlink:href="https://github.com/Amourspirit/libreoffice_ooodev_ext/raw/main/dist/OooDev.oxt" />
     </update-download>
     <publisher>
         <name lang="en" xlink:href="https://github.com/Amourspirit/libreoffice_ooodev_ext">AmourSpirit</name>
