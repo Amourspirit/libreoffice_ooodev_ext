@@ -11,7 +11,7 @@
     </dependencies> -->
     <update-download>
         <src
-            xlink:href="@update_url@" />
+            xlink:href="@update_url_oxt@" />
     </update-download>
     <publisher>
         <name lang="en" xlink:href="@publisher_url@">@publisher@</name>

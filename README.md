@@ -23,7 +23,7 @@ To update the extension from the development container, run the following comman
 poetry update
 ```
 
-This command will install the latest verssion of [OOO Development Tools].
+This command will install the latest version of [OOO Development Tools].
 
 Edit the `pyproject.toml` file and update the version number.
 
