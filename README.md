@@ -2,15 +2,15 @@
 <img src="https://user-images.githubusercontent.com/4193389/260558706-6a975af5-0815-4d85-987a-6f8b3ff20609.png" alt="OooDev Logo" width="174" height="174">
 </p>
 
-# OooDev LibreOffice Python Extension
+# OOO Development Tools Extension
 
 This project brings to power of [OOO Development Tools] (OooDev) to LibreOffice as an extension.
 
-[OOO Development Tools] can be [pip installed](https://pypi.org/project/ooo-dev-tools/) or [compiled into a macro](https://oooscript.readthedocs.io/en/latest/); However, this can be cumbersome.
+[OOO Development Tools] can be [pip installed](https://pypi.org/project/ooo-dev-tools/) or [compiled into a macro](https://oooscript.readthedocs.io/en/latest/); However, this can be cumbersome that is the reason for this project.
 
 By installing this extension you can have the power of [OOO Development Tools] at your fingertips with no extra need to pip install or compile into a macro.
 
-The extension can be found in the [dist](dist) folder.
+On LibreOffice Extensions the `OooDev` extension can be found [here](https://extensions.libreoffice.org/en/extensions/show/41700), locally the `OooDev` extension can is found in the [dist](dist) folder.
 
 <details>
 <summary>Develop Notes</summary>
