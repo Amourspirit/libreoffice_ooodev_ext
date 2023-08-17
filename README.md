@@ -10,6 +10,7 @@ This project brings to power of [OOO Development Tools] (OooDev) to LibreOffice 
 
 By installing this extension you can have the power of [OOO Development Tools] at your fingertips with no extra need to pip install or compile into a macro.
 
+A guide on how to install `OooDev` can be found [here](https://python-ooo-dev-tools.readthedocs.io/en/latest/guide/guide_ooodev_oxt.html).  
 On LibreOffice Extensions the `OooDev` extension can be found [here](https://extensions.libreoffice.org/en/extensions/show/41700), locally the `OooDev` extension can is found in the [dist](dist) folder.
 
 <details>
