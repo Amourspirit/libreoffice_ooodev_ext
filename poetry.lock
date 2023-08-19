@@ -122,6 +122,17 @@ files = [
 ooouno = ">=2.1.2"
 
 [[package]]
+name = "oooenv"
+version = "0.2.2"
+description = "Configures a project python environment for LibreOffice UNO."
+optional = false
+python-versions = ">=3.8,<4.0"
+files = [
+    {file = "oooenv-0.2.2-py3-none-any.whl", hash = "sha256:6ff74a5c9c33220f42246a01b4585290bb8a089f3f4fd8d233ddf3a4beb620e4"},
+    {file = "oooenv-0.2.2.tar.gz", hash = "sha256:86044c2de7ed2e24c1d683c6b2351fa2a0d79dd78587653be68625af76bf5817"},
+]
+
+[[package]]
 name = "oooscript"
 version = "1.1.3"
 description = "Compiles several python scripts into a single script that can be eaisly used by LibreOffice as a macro."
@@ -394,4 +405,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "98f9831706c28ba282fd7c1206a94fd5913490117e0dd054530e7ca5c9da8abb"
+content-hash = "753047956e4f121f3961920cd9326f719f6e066da9d1dc7bdcc110bfa72b0145"

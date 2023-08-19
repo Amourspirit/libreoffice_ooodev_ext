@@ -1,4 +1,4 @@
-[oxt.metadata]
+[tool.oxt.metadata]
 build_dir = "build"
 dist_dir = "dist"
 oxt_name = "OooDev"
@@ -7,7 +7,7 @@ py_pkg_names = ["ooodev", "ooo"]
 py_pkg_files = ["typing_extensions.py"]
 update_file = "ooodev.ext.update.xml"
 
-[oxt.token]
+[tool.oxt.token]
 # in the form of "token_name": "token_value"
 # in the files the token will have a prefix and suffix of @
 publisher = "AmourSpirit"
@@ -41,6 +41,7 @@ pytest-dotenv = "^0.5.2"
 black = "^23.7.0"
 oooscript = "^1.1.3"
 toml = "^0.10.2"
+oooenv = "^0.2.2"
 
 [build-system]
 requires = ["poetry-core"]

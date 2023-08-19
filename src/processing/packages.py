@@ -16,11 +16,16 @@ class Packages(metaclass=Singleton):
     def __init__(self) -> None:
         self._config = Config()
         cfg = toml.load(self._config.toml_path)
-        self._pkg_names: Set[str] = set(cfg["oxt"]["metadata"]["py_pkg_names"])
-        self._pkg_files: Set[str] = set(cfg["oxt"]["metadata"]["py_pkg_files"])
+        self._pkg_names: Set[str] = set(cfg["tool"]["oxt"]["metadata"]["py_pkg_names"])
+        self._pkg_files: Set[str] = set(cfg["tool"]["oxt"]["metadata"]["py_pkg_files"])
         self._venv_path = Path(self._get_virtual_env_path())
         major, minor, *_ = sys.version_info
         self._site_packages_path = self._venv_path / "lib" / f"python{major}.{minor}" / "site-packages"
+        if not self._site_packages_path.exists():
+            # windows
+            self._site_packages_path = self._venv_path / "Lib" / "site-packages"
+        if not self._site_packages_path.exists():
+            raise FileNotFoundError("Unable to get Site Packages Path")
 
     # region Methods
 

@@ -12,14 +12,14 @@ class Token(metaclass=Singleton):
         toml_path = file_util.find_file_in_parent_dirs("pyproject.toml")
         cfg = toml.load(toml_path)
 
-        tokens = cast(Dict[str, str], cfg["oxt"]["token"])
+        tokens = cast(Dict[str, str], cfg["tool"]["oxt"]["token"])
         self._tokens: Dict[str, str] = {}
         for token, replacement in tokens.items():
             self._tokens[f"@{token}@"] = replacement
         self._tokens["@version@"] = str(cfg["tool"]["poetry"]["version"])
         self._tokens["@license@"] = str(cfg["tool"]["poetry"]["license"])
-        self._tokens["@oxt_name@"] = str(cfg["oxt"]["metadata"]["oxt_name"])
-        self._tokens["@dist_dir@"] = str(cfg["oxt"]["metadata"]["dist_dir"])
+        self._tokens["@oxt_name@"] = str(cfg["tool"]["oxt"]["metadata"]["oxt_name"])
+        self._tokens["@dist_dir@"] = str(cfg["tool"]["oxt"]["metadata"]["dist_dir"])
         for token, replacement in self._tokens.items():
             self._tokens[token] = self.process(replacement)
 

@@ -80,15 +80,15 @@ def find_files_matching_patterns(root_dir: str | Path, ext: Iterable[str]) -> Li
     return file_paths
 
 
-def read_file(file_path: str) -> str:
+def read_file(file_path: str, encoding="UTF-8") -> str:
     """Read the contents of the given file and return it as a string."""
-    with open(file_path, "r") as f:
+    with open(file_path, "r", encoding=encoding) as f:
         return f.read()
 
 
-def write_string_to_file(file_path: str, content: str) -> None:
+def write_string_to_file(file_path: str, content: str, encoding="UTF-8") -> None:
     """Write the given string to the specified file."""
-    with open(file_path, "w") as f:
+    with open(file_path, "w", encoding=encoding) as f:
         f.write(content)
 
 
