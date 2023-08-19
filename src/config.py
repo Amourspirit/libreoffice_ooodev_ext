@@ -1,5 +1,5 @@
 from __future__ import annotations
-from typing import Set
+from typing import Set, Dict, Any, cast
 from . import file_util
 import toml
 from pathlib import Path
@@ -18,13 +18,14 @@ class Config(metaclass=Singleton):
         self._root_path = self._toml_path.parent
         cfg = toml.load(self._toml_path)
         token = Token()
-        self._build_dir_name = token.process(str(cfg["oxt"]["metadata"]["build_dir"]))
-        self._dist_dir_name = token.process(str(cfg["oxt"]["metadata"]["dist_dir"]))
-        self._otx_name = token.process(str(cfg["oxt"]["metadata"]["oxt_name"]))
-        self._update_file = token.process(str(cfg["oxt"]["metadata"]["update_file"]))
-        self._ver_str = str(cfg["tool"]["poetry"]["version"])
-        self._license = str(cfg["tool"]["poetry"]["license"])
-        self._token_file_ext: Set[str] = set(cfg["oxt"]["metadata"]["token_file_ext"])
+        cfg_meta: Dict[str, Any] = cfg["tool"]["oxt"]["metadata"]
+        self._build_dir_name = token.process(cast(str, cfg_meta["build_dir"]))
+        self._dist_dir_name = token.process(cast(str, cfg_meta["dist_dir"]))
+        self._otx_name = token.process(cast(str, cfg_meta["oxt_name"]))
+        self._update_file = token.process(cast(str, cfg_meta["update_file"]))
+        self._ver_str = cast(str, cfg["tool"]["poetry"]["version"])
+        self._license = cast(str, cfg["tool"]["poetry"]["license"])
+        self._token_file_ext: Set[str] = set(cast(list, cfg_meta["token_file_ext"]))
 
     # region Properties
     @property
