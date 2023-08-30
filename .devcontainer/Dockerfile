@@ -3,6 +3,7 @@ FROM linuxserver/libreoffice:${LO_VERSION}
 
 ARG CODE_PORT=2002
 ARG CONFIG_DIR=/config
+ARG POETRY_VER=1.6.1
 
 # Had Error: Compilation error in psutil/_psutil_linux
 # See Github: https://github.com/giampaolo/psutil//issues/664
@@ -67,7 +68,7 @@ ENV RUN_ENV=${RUN_ENV} \
     PIP_NO_CACHE_DIR=off \
     PIP_DISABLE_PIP_VERSION_CHECK=on \
     PIP_DEFAULT_TIMEOUT=100 \
-    POETRY_VERSION=1.5.1 \
+    POETRY_VERSION=${POETRY_VER} \
     LO_CONN_PORT=${CODE_PORT}
     # ENV=$CONFIG_DIR/.bashrc
     # PATH="$CONFIG_DIR/.cargo/bin:$PATH"
