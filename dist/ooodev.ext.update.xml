@@ -4,7 +4,7 @@
     xmlns:l="http://libreoffice.org/extensions/description/2011"
     xmlns:xlink="http://www.w3.org/1999/xlink">
     <identifier value="org.openoffice.extensions.ooodev" />
-    <version value="0.12.2" />
+    <version value="0.12.2.1" />
     <!-- <dependencies>
         <l:LibreOffice-minimal-version value="7.0"
             dep:name="LibreOffice 7.0 minimum, or more recent" />

@@ -17,7 +17,7 @@ update_url_xml = "https://raw.githubusercontent.com/Amourspirit/libreoffice_oood
 
 [tool.poetry]
 name = "OOO Development Tools Extension"
-version = "0.12.2"
+version = "0.12.2.1"
 description = "Template for creating python projects for LibreOffice"
 authors = [
     ":Barry-Thomas-Paul: Moss <bigbytetech@gmail.com>"
