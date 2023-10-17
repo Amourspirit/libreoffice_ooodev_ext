@@ -8,7 +8,7 @@ from .token import Token
 class Update(metaclass=Singleton):
     def __init__(self) -> None:
         self._config = Config()
-        self._update_file = self._config.root_path / self._config.update_file
+        self._update_file = self._config.root_path / "src" / "ext.update.xml"
         self._dist_path = self._config.root_path / self._config.dist_dir_name
 
     # region Methods
@@ -19,7 +19,7 @@ class Update(metaclass=Singleton):
 
     def _write_text(self, text: str) -> None:
         """Writes the text to the update file."""
-        dest_file = self._dist_path / self._update_file.name
+        dest_file = self._dist_path / self._config.update_file  # self._update_file.name
         with open(dest_file, "w") as f:
             f.write(text)
 

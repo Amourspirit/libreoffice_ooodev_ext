@@ -1,19 +1,18 @@
-OOO Development Tools Extension
-Copyright (c) 2023 :Barry-Thomas-Paul: Moss
+___display_name_en_us___
+Copyright (c) 2023 ___authors___
 
-This extension is under MIT license
+This extension is under ___license___ license
 
-Add OOO Development Tools (OooDev) Library to LibreOffice without needing
-pip install.
+___description_en_us___
 
 *************************************************************************
 
    The Contents of this file are made available subject to the terms of
    the following license
 
-      - GThe MIT License (MIT)
+      - The MIT License (MIT)
 
-Copyright 2023 :Barry-Thomas-Paul: Moss
+Copyright 2023 ___authors___
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 

@@ -1,23 +1,54 @@
-[tool.oxt.metadata]
+[tool.oxt.config]
+auto_install_in_site_packages = true
 build_dir = "build"
 dist_dir = "dist"
+install_wheel = false
 oxt_name = "OooDev"
-token_file_ext = ["txt", "xml", "xcu"]
-py_pkg_names = ["ooodev", "ooo"]
-py_pkg_files = ["typing_extensions.py"]
+py_pkg_dir = "py_pkgs"
+token_file_ext = ["txt", "xml", "xcu", "xcs"]
+py_pkg_names = []
+py_pkg_files = []
 update_file = "ooodev.ext.update.xml"
+zip_preinstall_pure = true
+window_timeout = 5 # number of seconds to wait for window to appear
+dialog_desktop_owned = true # determines if the dialog is owned by the desktop window
+resource_dir_name = "resources"
+resource_properties_prefix = "pipstrings"
+default_locale = ["en", "US"]
 
 [tool.oxt.token]
-# in the form of "token_name": "token_value"
-# in the files the token will have a prefix and suffix of @
-publisher = "AmourSpirit"
+pip_wheel_url = "https://files.pythonhosted.org/packages/50/c2/e06851e8cc28dcad7c155f4753da8833ac06a5c704c109313b8d5a62968a/pip-23.2.1-py3-none-any.whl"
+test_internet_url = "https://duckduckgo.com"
+log_pip_installs = false
+lo_identifier = "org.openoffice.extensions.ooodev"
+lo_implementation_name = "OooDevRunner"
+display_name_en_us = "OOO Development Tools"
+description_en_us = "OOO Development Tools (OooDev) Library for LibreOffice"
+publisher_en_us = "AmourSpirit"
 publisher_url = "https://github.com/Amourspirit/libreoffice_ooodev_ext"
-update_url_oxt = "https://raw.githubusercontent.com/Amourspirit/libreoffice_ooodev_ext/main/@dist_dir@/@oxt_name@.oxt"
-update_url_xml = "https://raw.githubusercontent.com/Amourspirit/libreoffice_ooodev_ext/main/@dist_dir@/ooodev.ext.update.xml"
+update_url_oxt = "https://raw.githubusercontent.com/Amourspirit/libreoffice_ooodev_ext/main/___dist_dir___/___oxt_name___.oxt"
+update_url_xml = "https://raw.githubusercontent.com/Amourspirit/libreoffice_ooodev_ext/main/___dist_dir___/___update_file___"
+url_pip = 'https://bootstrap.pypa.io/get-pip.py'
+log_file = "ooodev_tools_install.log"
+log_name = "OOO PIP Installer"
+log_level = "INFO" # NONE, DEBUG, INFO, WARNING, ERROR, CRITICAL
+log_format = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+log_add_console = false # should be false for production
+lo_pip = "ooodev_tools_pip"
+platform = "all"
+startup_event = "OnStartApp" # OnStartApp or onFirstVisibleTask
+show_progress = true
+delay_startup = true # determines if installing waits fo the window to load before installing
+
+[tool.oxt.requirements]
+ooo-dev-tools = ">=0.12.2"
+
+[tool.oxt.preinstall.pure]
+# verr = ">=1.1.2"
 
 [tool.poetry]
 name = "OOO Development Tools Extension"
-version = "0.12.2.1"
+version = "0.12.2.2"
 description = "Template for creating python projects for LibreOffice"
 authors = [
     ":Barry-Thomas-Paul: Moss <bigbytetech@gmail.com>"
@@ -31,7 +62,7 @@ packages = [
 [tool.poetry.dependencies]
 python = "^3.8"
 ooouno = ">=2.1.2"
-ooo-dev-tools = "0.12.2"
+ooo-dev-tools = ">=0.12.2"
 
 
 [tool.poetry.group.dev.dependencies]
