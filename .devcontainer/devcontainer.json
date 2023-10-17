@@ -7,22 +7,14 @@
 	},
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
 	"dockerComposeFile": "docker-compose.yml",
-	"service": "ooodev_ext",
-	"workspaceFolder": "/workspace/ooodev_py_ext",
+	"service": "lo_pip_app",
+	"workspaceFolder": "/workspace/libreoffice_pip_ext",
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	"forwardPorts": [3002, 3003],
+	"forwardPorts": [3020, 3021],
 	"portsAttributes": {
-		"3002": {
-			"visibility": "private",
-			"label": "LibreOffice http Server"
-		},
-		"3003": {
-			"visibility": "private",
-			"label": "LibreOffice https Server"
-		},
 		"2002": {
 			"onAutoForward": "silent",
 			"visibility": "private"
@@ -48,9 +40,7 @@
 				"ms-vscode.test-adapter-converter",
 				"Phu1237.vs-browser",
 				"streetsidesoftware.code-spell-checker",
-				"bungcip.better-toml",
-				"adamraichu.zip-viewer",
-				"redhat.vscode-xml"
+				"bungcip.better-toml"
 			],
 			// Adds VS Code settings.json values into the environment.
 			"settings": {
@@ -62,7 +52,7 @@
 						]
 					}
 				},
-				"vs-browser.url": "http://localhost:3002"
+				"vs-browser.url": "http://localhost:3020"
 			}
 		}
 	},
