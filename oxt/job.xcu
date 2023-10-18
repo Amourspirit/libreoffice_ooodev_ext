@@ -4,16 +4,16 @@
   xmlns:oor="http://openoffice.org/2001/registry" xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <node oor:name="Jobs">
-    <node oor:name="OooDevRunnerJob" oor:op="fuse">
+    <node oor:name="___lo_implementation_name___Job" oor:op="fuse">
       <prop oor:name="Service">
-        <value>org.openoffice.extensions.ooodev.OooDevRunner</value>
+        <value>___lo_identifier___.___lo_implementation_name___</value>
       </prop>
     </node>
   </node>
   <node oor:name="Events">
-    <node oor:name="OnStartApp" oor:op="fuse">
+    <node oor:name="___startup_event___" oor:op="fuse">
       <node oor:name="JobList">
-        <node oor:name="OooDevRunnerJob" oor:op="fuse" />
+        <node oor:name="___lo_implementation_name___Job" oor:op="fuse" />
       </node>
     </node>
   </node>

@@ -1,1 +1,0 @@
-Biblioteca de herramientas de desarrollo OOO (OooDev) para LibreOffice

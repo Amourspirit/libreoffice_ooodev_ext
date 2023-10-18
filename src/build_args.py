@@ -14,3 +14,5 @@ class BuildArgs:
     """Whether to copy python packages into pythonpath folder."""
     make_dist: bool = True
     """Whether to make the dist zip(oxt) file in the dist folder."""
+    pre_install_pure_packages: bool = True
+    """Whether to pre-install pure packages."""
