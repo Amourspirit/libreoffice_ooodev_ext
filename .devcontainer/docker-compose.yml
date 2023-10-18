@@ -1,7 +1,7 @@
 version: "3.9"
 
 services:
-  lo_pip_app:
+  ooodev_ext:
     env_file: .env
     network_mode: "bridge"
     # env_file: user.env
@@ -13,7 +13,7 @@ services:
         CONFIG_DIR: /config
         POETRY_VER: "1.6.1"
     # user: root
-    container_name: lo_pip_app
+    container_name: ooodev_ext
     security_opt:
       - seccomp:unconfined #optional
     environment:
@@ -22,11 +22,11 @@ services:
       - PGID=0
       - CONFIG_DIR=/config
       - DEV_CONTAINER=1
-      - WORK_DIR=/workspace/libreoffice_pip_ext
+      - WORK_DIR=/workspace/ooodev_py_ext
     volumes:
       - type: bind
         source: ../
-        target: /workspace/libreoffice_pip_ext
+        target: /workspace/ooodev_py_ext
       - type: bind
         source: ../Documents
         target: /config/Documents
@@ -38,11 +38,11 @@ services:
         target: /config
       - type: volume
         source: app_virtual_env
-        target: /workspace/libreoffice_pip_ext/.venv
+        target: /workspace/ooodev_py_ext/.venv
     
     ports:
-      - 3020:3000
-      - 3021:3001
+      - 3002:3000
+      - 3003:3001
     restart: unless-stopped
 
 volumes:
