@@ -10,6 +10,10 @@ from .processing.req_packages import ReqPackages
 from .processing.update import Update
 from .processing.json_config import JsonConfig
 from .processing.default_resource import DefaultResource
+from .processing.locale.descriptions import Descriptions
+from .processing.locale.publisher import Publisher
+from .processing.locale.publisher_update import PublisherUpdate
+from .processing.locale.name import Name
 from .install.pre_install_pure import PreInstallPure
 
 
@@ -38,6 +42,7 @@ class Build:
             self._process_tokens()
 
         self._process_config()
+
         self._copy_py_req_packages()
         self._copy_py_req_files()
         self._clear_req_cache()
@@ -56,6 +61,7 @@ class Build:
         if self._args.pre_install_pure_packages:
             self._pre_install_pure_packages()
 
+        self._write_xml()
         self._ensure_default_resource()
 
         if self._args.make_dist:
@@ -66,6 +72,17 @@ class Build:
         """Processes the tokens in the given text."""
         token = Token()
         return token.process(text)
+
+    def _write_xml(self) -> None:
+        """Writes the descriptions."""
+        descriptions = Descriptions()
+        descriptions.write()
+
+        name = Name()
+        name.write()
+
+        publisher = Publisher()
+        publisher.write()
 
     def clean(self) -> None:
         """Cleans the project."""
@@ -185,3 +202,6 @@ class Build:
         """Processes the update file."""
         update = Update()
         update.process()
+
+        publisher_update = PublisherUpdate()
+        publisher_update.write()

@@ -1,9 +1,9 @@
-___display_name_en_us___
+___display_name___
 Copyright (c) 2023 ___authors___
 
 This extension is under ___license___ license
 
-___description_en_us___
+___description___
 
 *************************************************************************
 

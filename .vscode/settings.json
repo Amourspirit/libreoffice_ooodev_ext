@@ -99,7 +99,10 @@
         }
     ],
     "cSpell.words": [
-        "Addin"
+        "Addin",
+        "endregion",
+        "kargs",
+        "lxml"
     ],
     "python.analysis.typeCheckingMode": "basic"
 }

@@ -36,9 +36,9 @@ class Token(metaclass=Singleton):
         key_types = {
             "lo_identifier": str,
             "lo_implementation_name": str,
-            "display_name_en_us": str,
-            "description_en_us": str,
-            "publisher_en_us": str,
+            "publisher": str,
+            "display_name": str,
+            "description": str,
             "url_pip": str,
             "log_format": str,
             "lo_pip": str,
@@ -48,7 +48,7 @@ class Token(metaclass=Singleton):
             "show_progress": bool,
             "delay_startup": bool,
             "log_pip_installs": bool,
-            "log_add_console": bool
+            "log_add_console": bool,
         }
         for key, value in key_types.items():
             if key not in cfg:

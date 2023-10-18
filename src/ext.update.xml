@@ -12,10 +12,5 @@
     <update-download>
         <src xlink:href="___update_url_oxt___" />
     </update-download>
-    <publisher>
-        <name lang="en" xlink:href="___publisher_url___">___publisher_en_us___</name>
-        <name lang="de" xlink:href="___publisher_url___">___publisher_en_us___</name>
-        <name lang="fr" xlink:href="___publisher_url___">___publisher_en_us___</name>
-        <name lang="es" xlink:href="___publisher_url___">___publisher_en_us___</name>
-    </publisher>
+    <publisher></publisher>
 </description>

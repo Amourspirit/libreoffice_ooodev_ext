@@ -12,7 +12,6 @@
     </update-information>
 
     <extension-description>
-        <src xlink:href="pkg-desc/descr-en.txt" lang="en" />
     </extension-description>
 
     <icon>
@@ -24,17 +23,13 @@
             dep:name="LibreOffice 7.0 minimum, or more recent" /> -->
     </dependencies>
 
-    <display-name>
-        <name lang="en">___display_name_en_us___</name>
-    </display-name>
+    <display-name></display-name>
 
     <registration>
         <simple-license accept-by="user" suppress-on-update="true">
             <license-text xlink:href="LICENSE-en.txt" lang="en" />
         </simple-license>
     </registration>
-    <publisher>
-        <name lang="en" xlink:href="___publisher_url___">___publisher_en_us___</name>
-    </publisher>
+    <publisher></publisher>
 
 </description>
