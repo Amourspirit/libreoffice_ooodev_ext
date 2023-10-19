@@ -530,6 +530,8 @@ class ___lo_implementation_name___(unohelper.Base, XJob):
 
     def _show_extra_debug_info(self):
         self._logger.debug(f"Config Package Location: {self._config.package_location}")
+        self._logger.debug(f"Config Python Path: {self._config.python_path}")
+        self._logger.debug(f"Config Site Packages Path: {self._config.site_packages}")
         self._logger.debug(f"Config Is User Installed: {self._config.is_user_installed}")
         self._logger.debug(f"Config Is Share Installed: {self._config.is_shared_installed}")
         self._logger.debug(f"Config Is Bundle Installed: {self._config.is_bundled_installed}")
