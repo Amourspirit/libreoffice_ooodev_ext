@@ -78,7 +78,7 @@ class JsonConfig(metaclass=Singleton):
         json_config["has_locals"] = self._config.has_locals
 
         # save the file
-        with open(json_config_path, "w") as f:
+        with open(json_config_path, "w", encoding="utf-8") as f:
             json.dump(json_config, f, indent=4)
 
     def _validate(self) -> None:
