@@ -45,7 +45,7 @@ class Descriptions:
 
     def _write_desc_file(self, fnm: Path, content: str) -> None:
         """Write the description file."""
-        with open(fnm, "w") as f:
+        with open(fnm, "w", encoding="utf-8") as f:
             f.write(self._token.process(content))
 
     def _write_xml(self, elements: List[Element]) -> None:

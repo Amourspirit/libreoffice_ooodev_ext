@@ -47,7 +47,7 @@ en = { name = "___publisher___", url="___publisher_url___" }
 en = "___display_name___"
 
 [tool.oxt.locale.desc]
-en = "OOO Development Tools (OooDev) Library for LibreOffice"
+en = "___description___"
 af = "Ontwikkelingshulpmiddels (OooDev) Biblioteek vir LibreOffice."
 ar = "أدوات التطوير (OooDev) مكتبة لـ LibreOffice."
 az = "İnkişaf alətləri (OooDev) LibreOffice üçün kitabxana."
@@ -132,7 +132,7 @@ ooo-dev-tools = ">=0.12.2"
 
 [tool.poetry]
 name = "OOO Development Tools Extension"
-version = "0.12.2.3"
+version = "0.12.2.4"
 description = "Template for creating python projects for LibreOffice"
 authors = [
     ":Barry-Thomas-Paul: Moss <bigbytetech@gmail.com>"

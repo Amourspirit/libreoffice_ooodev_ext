@@ -5,10 +5,9 @@
     xmlns:xlink="http://www.w3.org/1999/xlink">
     <identifier value="___lo_identifier___" />
     <version value="___version___" />
-    <!-- <dependencies>
-        <l:LibreOffice-minimal-version value="7.0"
-            dep:name="LibreOffice 7.0 minimum, or more recent" />
-    </dependencies> -->
+    <dependencies>
+        <l:LibreOffice-minimal-version value="7.0" />
+    </dependencies>
     <update-download>
         <src xlink:href="___update_url_oxt___" />
     </update-download>

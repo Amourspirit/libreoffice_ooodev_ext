@@ -20,7 +20,7 @@ class Update(metaclass=Singleton):
     def _write_text(self, text: str) -> None:
         """Writes the text to the update file."""
         dest_file = self._dist_path / self._config.update_file  # self._update_file.name
-        with open(dest_file, "w") as f:
+        with open(dest_file, "w", encoding="utf-8") as f:
             f.write(text)
 
     def process(self) -> None:
