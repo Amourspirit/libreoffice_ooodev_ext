@@ -53,6 +53,11 @@ class JsonConfig(metaclass=Singleton):
         except Exception:
             self._resource_properties_prefix = "pipstrings"
 
+        try:
+            self._isolate_windows = cast(List[str], cfg["tool"]["oxt"]["isolate"]["windows"])
+        except Exception:
+            self._isolate_windows = []
+
         self._validate()
 
     def update_json_config(self, json_config_path: Path) -> None:
@@ -72,6 +77,7 @@ class JsonConfig(metaclass=Singleton):
         json_config["default_locale"] = self._default_locale
         json_config["resource_dir_name"] = self._resource_dir_name
         json_config["resource_properties_prefix"] = self._resource_properties_prefix
+        json_config["isolate_windows"] = self._isolate_windows
         # json_config["log_pip_installs"] = self._log_pip_installs
         # update the requirements
         json_config["requirements"] = self._requirements

@@ -1,6 +1,6 @@
 from __future__ import annotations
 from pathlib import Path
-from typing import Dict, List, cast
+from typing import Dict, List, Set, cast
 import json
 
 
@@ -32,6 +32,7 @@ class BasicConfig(metaclass=ConfigMeta):
         self._default_locale = cast(List[str], (kwargs["default_locale"]))
         self._resource_dir_name = str(kwargs["resource_dir_name"])
         self._resource_properties_prefix = str(kwargs["resource_properties_prefix"])
+        self._isolate_windows = set(kwargs["isolate_windows"])
 
         if "requirements" not in kwargs:
             kwargs["requirements"] = {}
@@ -89,6 +90,15 @@ class BasicConfig(metaclass=ConfigMeta):
         Gets the flag indicating if wheel should be installed.
         """
         return self._install_wheel
+
+    @property
+    def isolate_windows(self) -> Set[str]:
+        """
+        Gets the list of package that are to  be installed in 32 or 64 bit locations.
+
+        The value for this property can be set in pyproject.toml (tool.oxt.isolate.windows)
+        """
+        return self._isolate_windows
 
     @property
     def lo_identifier(self) -> str:

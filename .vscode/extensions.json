@@ -3,6 +3,7 @@
         "github.copilot",
         "github.copilot-chat",
         "mhutchie.git-graph",
-        "oderwat.indent-rainbow"
+        "oderwat.indent-rainbow",
+        "redhat.vscode-xml"
     ]
 }
