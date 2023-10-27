@@ -135,7 +135,7 @@ windows = []
 
 [tool.poetry]
 name = "OOO Development Tools Extension"
-version = "0.12.2.4"
+version = "0.12.2.5"
 description = "Template for creating python projects for LibreOffice"
 authors = [
     ":Barry-Thomas-Paul: Moss <bigbytetech@gmail.com>"

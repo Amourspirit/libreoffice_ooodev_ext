@@ -124,5 +124,14 @@
                 </info>
             </prop>
         </group>
+        <group oor:name="Options">
+            <prop oor:name="OptionLoadOooDev" oor:type="xs:boolean">
+                <info>
+                    <desc>
+                        Determins if OooDev is loaded when LibreOffice is started.
+                    </desc>
+                </info>
+            </prop>
+        </group>
     </component>
 </oor:component-schema>
