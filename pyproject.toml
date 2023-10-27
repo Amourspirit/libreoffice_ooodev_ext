@@ -11,7 +11,7 @@ py_pkg_files = []
 update_file = "ooodev.ext.update.xml"
 zip_preinstall_pure = true
 window_timeout = 5 # number of seconds to wait for window to appear
-dialog_desktop_owned = true # determines if the dialog is owned by the desktop window
+dialog_desktop_owned = false # determines if the dialog is owned by the desktop window
 resource_dir_name = "resources"
 resource_properties_prefix = "pipstrings"
 default_locale = ["en", "US"]
@@ -20,7 +20,7 @@ default_locale = ["en", "US"]
 pip_wheel_url = "https://files.pythonhosted.org/packages/50/c2/e06851e8cc28dcad7c155f4753da8833ac06a5c704c109313b8d5a62968a/pip-23.2.1-py3-none-any.whl"
 test_internet_url = "https://duckduckgo.com"
 log_pip_installs = false
-lo_identifier = "org.openoffice.extensions.ooodev"
+lo_identifier = "com.github.amourspirit.extensions.ooodev"
 lo_implementation_name = "OooDevRunner"
 display_name = "OOO Development Tools"
 description = "OOO Development Tools (OooDev) Library for LibreOffice"
@@ -126,6 +126,9 @@ zu = "Izinhlelo zokuthuthukiswa (OooDev) Ikheli lase LibreOffice."
 
 [tool.oxt.requirements]
 ooo-dev-tools = ">=0.12.2"
+
+[tool.oxt.isolate]
+windows = []
 
 [tool.oxt.preinstall.pure]
 # verr = ">=1.1.2"
