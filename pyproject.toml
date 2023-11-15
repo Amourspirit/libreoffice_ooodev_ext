@@ -125,7 +125,7 @@ zu = "Izinhlelo zokuthuthukiswa (OooDev) Ikheli lase LibreOffice."
 
 
 [tool.oxt.requirements]
-ooo-dev-tools = ">=0.13.0"
+ooo-dev-tools = ">=0.13.1"
 
 [tool.oxt.isolate]
 windows = []
@@ -135,7 +135,7 @@ windows = []
 
 [tool.poetry]
 name = "OOO Development Tools Extension"
-version = "0.13.0"
+version = "0.13.1"
 description = "Template for creating python projects for LibreOffice"
 authors = [
     ":Barry-Thomas-Paul: Moss <bigbytetech@gmail.com>"
