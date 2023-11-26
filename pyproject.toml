@@ -1,3 +1,20 @@
+[tool.oxt.requirements]
+ooo-dev-tools = ">=0.14.0"
+
+[tool.poetry]
+name = "OOO Development Tools Extension"
+version = "0.14.0"
+description = "Template for creating python projects for LibreOffice"
+authors = [
+    ":Barry-Thomas-Paul: Moss <bigbytetech@gmail.com>"
+]
+license = "MIT"
+readme = "README.md"
+packages = [
+    { include = "src" }
+]
+
+
 [tool.oxt.config]
 auto_install_in_site_packages = true
 build_dir = "build"
@@ -123,28 +140,11 @@ zh_CN = "开发工具 (OooDev) 适用于 LibreOffice 的库。"
 zh_TW = "開發工具 (OooDev) 適用於 LibreOffice 的程式庫。"
 zu = "Izinhlelo zokuthuthukiswa (OooDev) Ikheli lase LibreOffice."
 
-
-[tool.oxt.requirements]
-ooo-dev-tools = ">=0.13.1"
-
 [tool.oxt.isolate]
 windows = []
 
 [tool.oxt.preinstall.pure]
 # verr = ">=1.1.2"
-
-[tool.poetry]
-name = "OOO Development Tools Extension"
-version = "0.13.1"
-description = "Template for creating python projects for LibreOffice"
-authors = [
-    ":Barry-Thomas-Paul: Moss <bigbytetech@gmail.com>"
-]
-license = "MIT"
-readme = "README.md"
-packages = [
-    { include = "src" }
-]
 
 [tool.poetry.dependencies]
 python = "^3.8"
