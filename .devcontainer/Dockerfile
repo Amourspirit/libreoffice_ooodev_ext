@@ -3,7 +3,7 @@ FROM linuxserver/libreoffice:${LO_VERSION}
 
 ARG CODE_PORT=2002
 ARG CONFIG_DIR=/config
-ARG POETRY_VER=1.6.1
+ARG POETRY_VER=1.7.1
 
 # Had Error: Compilation error in psutil/_psutil_linux
 # See Github: https://github.com/giampaolo/psutil//issues/664
