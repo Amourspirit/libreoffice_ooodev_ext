@@ -3,7 +3,7 @@ ooo-dev-tools = ">=0.15.0"
 
 [tool.poetry]
 name = "OOO Development Tools Extension"
-version = "0.15.0.1"
+version = "0.15.0.2"
 description = "Template for creating python projects for LibreOffice"
 authors = [
     ":Barry-Thomas-Paul: Moss <bigbytetech@gmail.com>"
@@ -32,6 +32,8 @@ dialog_desktop_owned = false # determines if the dialog is owned by the desktop 
 resource_dir_name = "resources"
 resource_properties_prefix = "pipstrings"
 default_locale = ["en", "US"]
+sym_link_cpython = false # https://tinyurl.com/ymeh4c9j#sym_link_cpython
+uninstall_on_update = true # https://tinyurl.com/ymeh4c9j#uninstall_on_update uninstall previous python packages on update
 
 [tool.oxt.token]
 pip_wheel_url = "https://files.pythonhosted.org/packages/50/c2/e06851e8cc28dcad7c155f4753da8833ac06a5c704c109313b8d5a62968a/pip-23.2.1-py3-none-any.whl"

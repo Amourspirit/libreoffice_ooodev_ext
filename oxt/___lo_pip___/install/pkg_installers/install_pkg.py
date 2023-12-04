@@ -10,11 +10,12 @@ from importlib.metadata import PackageNotFoundError, version
 from pathlib import Path
 
 from ...config import Config
-from ...ver.rules.ver_rules import VerRules, VerProto
+from ...lo_util.resource_resolver import ResourceResolver
+from ...lo_util.target_path import TargetPath
 from ...oxt_logger import OxtLogger
+from ...ver.rules.ver_rules import VerRules, VerProto
 from ..download import Download
 from ..progress import Progress
-from ...lo_util.resource_resolver import ResourceResolver
 
 
 # https://docs.python.org/3.8/library/importlib.metadata.html#module-importlib.metadata
@@ -53,6 +54,7 @@ class InstallPkg:
         self._flag_upgrade = flag_upgrade
         self._show_progress = bool(kwargs.get("show_progress", self._config.show_progress))
         self._resource_resolver = ResourceResolver(ctx=self.ctx)
+        self._target_path = TargetPath()
 
     def _get_logger(self) -> OxtLogger:
         return OxtLogger(log_name=__name__)
@@ -81,33 +83,6 @@ class InstallPkg:
                 log_file = f'"{log_file}"'
             cmd.append(f"--log={log_file}")
         return cmd
-
-    def _uninstall_pkg(self, pkg: str) -> bool:
-        # pip uninstall -y package1 package2 package3
-        cmd = ["uninstall", "-y"]
-        cmd = self._cmd_pip(*[*cmd, pkg])
-        self._logger.debug(f"Running command {cmd}")
-        self._logger.info(f"Uninstalling package {pkg}")
-        msg = f"Pip Uninstall success for: {pkg}"
-        err_msg = f"Pip Uninstall failed for: {pkg}"
-        if STARTUP_INFO:
-            process = subprocess.run(
-                cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, env=self._get_env(), startupinfo=STARTUP_INFO
-            )
-        else:
-            process = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, env=self._get_env())
-        result = False
-        if process.returncode == 0:
-            self._logger.info(msg)
-            result = True
-        else:
-            self._logger.error(err_msg)
-            try:
-                self._logger.error(process.stderr.decode("utf-8"))
-            except Exception as err:
-                self._logger.error(f"Error decoding stderr: {err}")
-
-        return result
 
     def _install_pkg(self, pkg: str, ver: str, force: bool) -> bool:
         """
@@ -138,8 +113,11 @@ class InstallPkg:
         elif self.flag_upgrade:
             cmd.append("--upgrade")
 
+        if not auto_target and self.config.is_win and len(self.config.isolate_windows) > 0:
+            auto_target = True
+
         if auto_target:
-            cmd.append(f"--target={self.config.site_packages}")
+            cmd.append(f"--target={self._target_path.get_package_target(pkg)}")
         elif self.config.is_user_installed:
             cmd.append("--user")
 
@@ -189,6 +167,33 @@ class InstallPkg:
 
         return result
 
+    def _uninstall_pkg(self, pkg: str) -> bool:
+        # pip uninstall -y package1 package2 package3
+        cmd = ["uninstall", "-y"]
+        cmd = self._cmd_pip(*[*cmd, pkg])
+        self._logger.debug(f"Running command {cmd}")
+        self._logger.info(f"Uninstalling package {pkg}")
+        msg = f"Pip Uninstall success for: {pkg}"
+        err_msg = f"Pip Uninstall failed for: {pkg}"
+        if STARTUP_INFO:
+            process = subprocess.run(
+                cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, env=self._get_env(), startupinfo=STARTUP_INFO
+            )
+        else:
+            process = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, env=self._get_env())
+        result = False
+        if process.returncode == 0:
+            self._logger.info(msg)
+            result = True
+        else:
+            self._logger.error(err_msg)
+            try:
+                self._logger.error(process.stderr.decode("utf-8"))
+            except Exception as err:
+                self._logger.error(f"Error decoding stderr: {err}")
+
+        return result
+
     def _get_env(self) -> Dict[str, str]:
         """
         Gets Environment used for subprocess.
@@ -234,10 +239,11 @@ class InstallPkg:
                 break
 
             ver_lst: List[str] = [rule.get_versions_str() for rule in rules]
-            pkg_ver = self.get_package_version(name)
-            if pkg_ver:
-                if not self._uninstall_pkg(name):
-                    return False
+            if self.config.uninstall_on_update:
+                pkg_ver = self.get_package_version(name)
+                if pkg_ver:
+                    if not self._uninstall_pkg(name):
+                        return False
             result = result and self._install_pkg(name, ",".join(ver_lst), force)
         self._logger.info("Installing packages Done!")
         return result
