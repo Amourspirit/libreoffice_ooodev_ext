@@ -11,16 +11,16 @@
     "autoDocstring.docstringFormat": "google",
     "workbench.colorCustomizations": {
         "[Monokai]": {
-            "titleBar.activeBackground": "#054602",
-            "titleBar.activeForeground": "#e49df4"
+            "titleBar.activeBackground": "#09bd81",
+            "titleBar.activeForeground": "#200227"
         },
         "[Default Dark+]": {
-            "titleBar.activeBackground": "#054602",
-            "titleBar.activeForeground": "#e49df4"
+            "titleBar.activeBackground": "#09bd81",
+            "titleBar.activeForeground": "#200227"
         },
         "[Visual Studio Dark]": {
-            "titleBar.activeBackground": "#054602",
-            "titleBar.activeForeground": "#e49df4"
+            "titleBar.activeBackground": "#09bd81",
+            "titleBar.activeForeground": "#200227"
         }
     },
     "workbench.colorTheme": "Monokai",
