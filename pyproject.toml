@@ -1,9 +1,9 @@
 [tool.oxt.requirements]
-ooo-dev-tools = ">=0.20.4"
+ooo-dev-tools = ">=0.22.0"
 
 [tool.poetry]
 name = "OOO Development Tools Extension"
-version = "0.20.4"
+version = "0.22.0"
 description = "Template for creating python projects for LibreOffice"
 authors = [
     ":Barry-Thomas-Paul: Moss <bigbytetech@gmail.com>"
