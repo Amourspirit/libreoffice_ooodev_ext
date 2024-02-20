@@ -206,6 +206,12 @@ class InstallPkg:
         my_env["PYTHONPATH"] = py_path
         return my_env
 
+    def _uninstall_allowed(self, pkg_name: str) -> bool:
+        """Check if a package can be uninstalled."""
+        if pkg_name.lower() == "pip":
+            return False
+        return True
+
     def install(self, req: Dict[str, str] | None = None, force: bool = False) -> bool:
         """
         Install all the packages in the configuration if they are not already installed and meet requirements.
@@ -239,7 +245,7 @@ class InstallPkg:
                 break
 
             ver_lst: List[str] = [rule.get_versions_str() for rule in rules]
-            if self.config.uninstall_on_update:
+            if self.config.uninstall_on_update and self._uninstall_allowed(name):
                 pkg_ver = self.get_package_version(name)
                 if pkg_ver:
                     if not self._uninstall_pkg(name):

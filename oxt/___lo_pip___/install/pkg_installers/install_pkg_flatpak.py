@@ -79,3 +79,7 @@ class InstallPkgFlatpak(InstallPkg):
         else:
             self._logger.error(err_msg)
         return False
+
+    def _uninstall_allowed(self, pkg_name: str) -> bool:
+        """Check if a package can be uninstalled."""
+        return super()._uninstall_allowed(pkg_name)
