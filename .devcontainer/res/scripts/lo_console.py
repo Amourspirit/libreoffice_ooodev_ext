@@ -21,7 +21,7 @@ except ImportError:
     interactive_hlp = None
 
 try:
-    from ooodev.utils.lo import Lo
+    from ooodev.loader import Lo
 except ImportError:
     print("ooodev is not installed. Please install it with 'poetry add --group=dev ooodev'")
     if TYPE_CHECKING:
