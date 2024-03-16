@@ -11,7 +11,7 @@ services:
       args:
         LO_VERSION: "7.6.3"
         CONFIG_DIR: /config
-        POETRY_VERSION: "1.7.1"
+        POETRY_VERSION: "1.8.2"
     # user: root
     container_name: ooodev_ext
     security_opt:
