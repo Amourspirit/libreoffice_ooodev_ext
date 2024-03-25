@@ -1,9 +1,9 @@
 [tool.oxt.requirements]
-ooo-dev-tools = ">=0.37.0"
+ooo-dev-tools = ">=0.38.0"
 
 [tool.poetry]
 name = "OOO Development Tools Extension"
-version = "0.37.0"
+version = "0.38.0"
 description = "Template for creating python projects for LibreOffice"
 authors = [
     ":Barry-Thomas-Paul: Moss <bigbytetech@gmail.com>"
@@ -158,7 +158,7 @@ ooo-dev-tools = ">=0.34.1"
 types-scriptforge = ">=2.0.1"
 pytest = "^7.4.0"
 pytest-dotenv = "^0.5.2"
-black = "^23.7.0"
+black = ">=24.3.0"
 oooscript = "^1.1.3"
 toml = "^0.10.2"
 oooenv = "^0.2.2"
