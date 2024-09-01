@@ -217,18 +217,18 @@ files = [
 
 [[package]]
 name = "ooo-dev-tools"
-version = "0.47.11"
+version = "0.47.13"
 description = "LibreOffice Developer Tools"
 optional = false
 python-versions = "<4.0,>=3.8"
 files = [
-    {file = "ooo_dev_tools-0.47.11-py3-none-any.whl", hash = "sha256:98c9f087cd79a177b8a8632f1b7fb42db3fdfa587314c398ce536e6c06648e57"},
-    {file = "ooo_dev_tools-0.47.11.tar.gz", hash = "sha256:b67216cc726c7aa50ad0c5676eae826d8512cbbddfb94bd1efc95820a2398cc0"},
+    {file = "ooo_dev_tools-0.47.13-py3-none-any.whl", hash = "sha256:461a7dab2b025dc587936e747869d7c53257f9ade00dfd5b64d9edbd783df370"},
+    {file = "ooo_dev_tools-0.47.13.tar.gz", hash = "sha256:a95bb0c6c89a423ebaebc7ef162ee3217f8ba2a6b11614f7487fcf96d4dfff5f"},
 ]
 
 [package.dependencies]
-ooouno = ">=2.1.2"
-typing-extensions = ">=4.9.0"
+ooouno = ">=3.0.0"
+typing-extensions = ">=4.12"
 
 [[package]]
 name = "oooenv"
@@ -259,18 +259,18 @@ scriptmerge = ">=1.1.0"
 
 [[package]]
 name = "ooouno"
-version = "2.1.2"
+version = "3.0.0"
 description = "Interfaces and classes for LibreOffice (uno)"
 optional = false
-python-versions = ">=3.7,<4.0"
+python-versions = "<4.0,>=3.8"
 files = [
-    {file = "ooouno-2.1.2-py3-none-any.whl", hash = "sha256:d06635941300d8e2a489b03592d9bfb9e70167c379352c275d3b96ac0586f4de"},
-    {file = "ooouno-2.1.2.tar.gz", hash = "sha256:3152a1769c0baa7d66efe0ae4b909a0a3f882562eb283d2672cbed2e31e01b82"},
+    {file = "ooouno-3.0.0-py3-none-any.whl", hash = "sha256:237af5c39c41892e00dacb7d89c18b62025af080c96579bb3c24051f0113fd65"},
+    {file = "ooouno-3.0.0.tar.gz", hash = "sha256:e4b4208387bda46c2ba777f9e406fba22d1eb4367d0ec56403f4fc23bb50d580"},
 ]
 
 [package.dependencies]
 types-unopy = ">=1.2.3"
-typing-extensions = ">=4.6.2,<5.0.0"
+typing-extensions = ">=4.12,<5.0"
 
 [[package]]
 name = "packaging"
@@ -502,16 +502,16 @@ types-uno-script = ">=0.1.1"
 
 [[package]]
 name = "typing-extensions"
-version = "4.10.0"
+version = "4.12.2"
 description = "Backported and Experimental Type Hints for Python 3.8+"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "typing_extensions-4.10.0-py3-none-any.whl", hash = "sha256:69b1a937c3a517342112fb4c6df7e72fc39a38e7891a5730ed4985b5214b5475"},
-    {file = "typing_extensions-4.10.0.tar.gz", hash = "sha256:b0abd7c89e8fb96f98db18d86106ff1d90ab692004eb746cf6eda2682f91b3cb"},
+    {file = "typing_extensions-4.12.2-py3-none-any.whl", hash = "sha256:04e5ca0351e0f3f85c6853954072df659d0d13fac324d0072316b67d7794700d"},
+    {file = "typing_extensions-4.12.2.tar.gz", hash = "sha256:1a7ead55c7e559dd4dee8856e3a88b41225abfe1ce8df57b7c13915fe121ffb8"},
 ]
 
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "18724394e584c545d081df0aa26af872e8198c8157154fafc51cce78e3e200cc"
+content-hash = "41067c122d63c2a092c4d44289728ccd5f0f286b522411ee380f65a98d428a42"
