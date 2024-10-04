@@ -29,16 +29,16 @@ class CheckBoxListener(unohelper.Base, XPropertyChangeListener):
         self.handler = handler
         self._logger.debug("CheckBoxListener.__init__ done")
 
-    def disposing(self, ev: Any):
+    def disposing(self, Source: Any):
         pass
 
-    def propertyChange(self, ev: PropertyChangeEvent):
+    def propertyChange(self, evt: PropertyChangeEvent):
         self._logger.debug("CheckBoxListener.propertyChange")
         try:
             # state (evn.NewValue) will be 1 for true and 0 for false
-            src = cast("UnoControlCheckBoxModel", ev.Source)
+            src = cast("UnoControlCheckBoxModel", evt.Source)
             if src.Name == "chkOooDev":
-                self.handler.load_ooo_dev = self.handler.state_to_bool(cast(int, (ev.NewValue)))
+                self.handler.load_ooo_dev = self.handler.state_to_bool(cast(int, (evt.NewValue)))
         except Exception as err:
             self._logger.error(f"CheckBoxListener.propertyChange: {err}", exc_info=True)
             raise
@@ -58,11 +58,11 @@ class OptionsDialogHandler(unohelper.Base, XContainerWindowEventHandler):
         self._logger.debug("OptionPage-OptionsDialogHandler.__init__ done")
 
     # region XContainerWindowEventHandler
-    def callHandlerMethod(self, window: UnoControlDialog, eventObject: Any, method: str):
-        self._logger.debug(f"OptionPage-OptionsDialogHandler.callHandlerMethod: {method}")
-        if method == "external_event":
+    def callHandlerMethod(self, xWindow: UnoControlDialog, EventObject: Any, MethodName: str):  # type: ignore
+        self._logger.debug(f"OptionPage-OptionsDialogHandler.callHandlerMethod: {MethodName}")
+        if MethodName == "external_event":
             try:
-                self._handle_external_event(window, eventObject)
+                self._handle_external_event(xWindow, EventObject)
             except Exception as e:
                 print(e)
             return True

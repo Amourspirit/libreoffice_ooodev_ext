@@ -35,6 +35,11 @@ class BasicConfig(metaclass=ConfigMeta):
         self._isolate_windows = set(kwargs["isolate_windows"])
         self._sym_link_cpython = bool(kwargs["sym_link_cpython"])
         self._uninstall_on_update = bool(kwargs["uninstall_on_update"])
+        self._install_on_no_uninstall_permission = bool(kwargs["install_on_no_uninstall_permission"])
+        self._no_pip_remove = set(kwargs["no_pip_remove"])
+        self._unload_after_install = bool(kwargs["unload_after_install"])
+        self._oxt_name = str(kwargs["oxt_name"])
+        self._extension_version = str(kwargs["extension_version"])
 
         if "requirements" not in kwargs:
             kwargs["requirements"] = {}
@@ -80,11 +85,29 @@ class BasicConfig(metaclass=ConfigMeta):
         return self._dialog_desktop_owned
 
     @property
+    def extension_version(self) -> str:
+        """
+        Gets extension version.
+
+        The value for this property can be set in pyproject.toml (tool.poetry.version)
+        """
+        return self._extension_version
+
+    @property
     def has_locals(self) -> bool:
         """
         Gets the flag indicating if the extension has local pip files to install.
         """
         return self._has_locals
+
+    @property
+    def install_on_no_uninstall_permission(self) -> bool:
+        """
+        Gets the flag indicating if a package cannot be uninstalled due to permission error,
+        then it will be installed anyway. This is usually the case when a package is installed
+        in the system packages folder.
+        """
+        return self._install_on_no_uninstall_permission
 
     @property
     def install_wheel(self) -> bool:
@@ -119,6 +142,26 @@ class BasicConfig(metaclass=ConfigMeta):
         The value for this property can be set in pyproject.toml (tool.oxt.token.lo_implementation_name)
         """
         return self._lo_implementation_name
+
+    @property
+    def no_pip_remove(self) -> Set[str]:
+        """
+        Gets the pip packages that are not allowed to be removed.
+
+        The value for this property can be set in pyproject.toml (tool.oxt.config.no_pip_remove)
+
+        This is the packages that are not allowed to be removed by the installer.
+        """
+        return self._no_pip_remove
+
+    @property
+    def oxt_name(self) -> str:
+        """
+        Gets the Otx name of the extension without the ``.otx`` extension.
+
+        The value for this property can be set in pyproject.toml (tool.oxt.token.oxt_name)
+        """
+        return self._oxt_name
 
     @property
     def py_pkg_dir(self) -> str:
@@ -178,6 +221,13 @@ class BasicConfig(metaclass=ConfigMeta):
         Gets the flag indicating if python packages should be uninstalled before updating.
         """
         return self._uninstall_on_update
+
+    @property
+    def unload_after_install(self) -> bool:
+        """
+        Gets the flag indicating if the extension installer should unload after installation.
+        """
+        return self._unload_after_install
 
     @property
     def window_timeout(self) -> int:

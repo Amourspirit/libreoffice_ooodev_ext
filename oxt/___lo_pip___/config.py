@@ -422,6 +422,17 @@ class Config(metaclass=Singleton):
         return self._is_bundled_installed
 
     @property
+    def no_pip_remove(self) -> Set[str]:
+        """
+        Gets the pip packages that are not allowed to be removed.
+
+        The value for this property can be set in pyproject.toml (tool.oxt.config.no_pip_remove)
+
+        This is the packages that are not allowed to be removed by the installer.
+        """
+        return self._basic_config.no_pip_remove
+
+    @property
     def os(self) -> str:
         """
         Gets the operating system.
@@ -436,6 +447,15 @@ class Config(metaclass=Singleton):
         May be empty string.
         """
         return self._pip_wheel_url
+
+    @property
+    def install_on_no_uninstall_permission(self) -> bool:
+        """
+        Gets the flag indicating if a package cannot be uninstalled due to permission error,
+        then it will be installed anyway. This is usually the case when a package is installed
+        in the system packages folder.
+        """
+        return self._basic_config.install_on_no_uninstall_permission
 
     @property
     def install_wheel(self) -> bool:
@@ -489,6 +509,15 @@ class Config(metaclass=Singleton):
         Gets the LibreOffice package location.
         """
         return self._package_location
+
+    @property
+    def oxt_name(self) -> str:
+        """
+        Gets the Otx name of the extension without the ``.otx`` extension.
+
+        The value for this property can be set in pyproject.toml (tool.oxt.token.oxt_name)
+        """
+        return self._basic_config.oxt_name
 
     @property
     def extension_info(self) -> ExtensionInfo:
@@ -586,6 +615,22 @@ class Config(metaclass=Singleton):
         If this is set to ``True`` then CPython will be symlinked on Linux AppImage and Mac OS.
         """
         return self._basic_config.sym_link_cpython
+
+    @property
+    def unload_after_install(self) -> bool:
+        """
+        Gets the flag indicating if the extension installer should unload after installation.
+        """
+        return self.basic_config.unload_after_install
+
+    @property
+    def extension_version(self) -> str:
+        """
+        Gets extension version.
+
+        The value for this property can be set in pyproject.toml (tool.poetry.version)
+        """
+        return self._basic_config.extension_version
 
     # endregion Properties
 
