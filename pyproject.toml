@@ -1,9 +1,9 @@
 [tool.oxt.requirements]
-ooo-dev-tools = ">=0.47.13"
+ooo-dev-tools = ">=0.47.18"
 
 [tool.poetry]
 name = "OOO Development Tools Extension"
-version = "0.47.13"
+version = "0.47.18"
 description = "Template for creating python projects for LibreOffice"
 authors = [
     ":Barry-Thomas-Paul: Moss <bigbytetech@gmail.com>"
@@ -34,6 +34,9 @@ resource_properties_prefix = "pipstrings"
 default_locale = ["en", "US"]
 sym_link_cpython = false # https://tinyurl.com/ymeh4c9j#sym_link_cpython
 uninstall_on_update = true # https://tinyurl.com/ymeh4c9j#uninstall_on_update uninstall previous python packages on update
+install_on_no_uninstall_permission = true # https://tinyurl.com/ymeh4c9j#install_on_no_uninstall_permission
+no_pip_remove = ["pip", "setuptools", "wheel"]
+unload_after_install = true
 
 [tool.oxt.token]
 pip_wheel_url = "https://files.pythonhosted.org/packages/50/c2/e06851e8cc28dcad7c155f4753da8833ac06a5c704c109313b8d5a62968a/pip-23.2.1-py3-none-any.whl"
@@ -150,7 +153,7 @@ windows = []
 
 [tool.poetry.dependencies]
 python = "^3.8"
-ooo-dev-tools = ">=0.47.13"
+ooo-dev-tools = ">=0.47.18"
 
 
 [tool.poetry.group.dev.dependencies]

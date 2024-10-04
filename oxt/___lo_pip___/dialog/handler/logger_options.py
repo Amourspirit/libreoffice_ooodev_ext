@@ -55,17 +55,17 @@ class ButtonListener(unohelper.Base, XActionListener):
         self.cast = cast
         self._logger.debug("ButtonListener.__init__ done")
 
-    def disposing(self, ev: Any):
+    def disposing(self, Source: Any):
         pass
 
-    def actionPerformed(self, ev: Any):
+    def actionPerformed(self, rEvent: Any):
         # sourcery skip: extract-method
         self._logger.debug("ButtonListener.actionPerformed")
         try:
-            cmd = str(ev.ActionCommand)
+            cmd = str(rEvent.ActionCommand)
             self._logger.debug(f"ButtonListener.actionPerformed cmd: {cmd}")
             if cmd == "CopyLogPath":
-                window = cast("UnoControlDialog", ev.Source.getContext())
+                window = cast("UnoControlDialog", rEvent.Source.getContext())
                 # lbl_log = cast("UnoControlFixedText", ev.Source.getContext().getControl("lblLogLocation"))
                 lbl_log = cast("UnoControlFixedText", window.getControl("lblLogLocation"))
                 clip_text = lbl_log.getText()
@@ -91,14 +91,14 @@ class RadioButtonListener(unohelper.Base, XPropertyChangeListener):
         self.cast = cast
         self._logger.debug("RadioButtonListener.__init__ done")
 
-    def disposing(self, ev: Any):
+    def disposing(self, Source: Any):
         pass
 
-    def propertyChange(self, ev: PropertyChangeEvent):
+    def propertyChange(self, evt: PropertyChangeEvent):
         self._logger.debug("RadioButtonListener.propertyChange")
         try:
             # state (evn.NewValue) will be 1 for true and 0 for false
-            src = cast("UnoControlRadioButtonModel", ev.Source)
+            src = cast("UnoControlRadioButtonModel", evt.Source)
             if src.Name in _LOG_OPTS:
                 self.cast.logging_level = _LOG_OPTS[src.Name]
         except Exception as err:
@@ -123,11 +123,11 @@ class OptionsDialogHandler(unohelper.Base, XContainerWindowEventHandler):
         self._logger.debug("OptionsDialogHandler.__init__ done")
 
     # region XContainerWindowEventHandler
-    def callHandlerMethod(self, window: UnoControlDialog, eventObject: Any, method: str):
-        self._logger.debug(f"OptionsDialogHandler.callHandlerMethod: {method}")
-        if method == "external_event":
+    def callHandlerMethod(self, xWindow: UnoControlDialog, EventObject: Any, MethodName: str):  # type: ignore
+        self._logger.debug(f"OptionsDialogHandler.callHandlerMethod: {MethodName}")
+        if MethodName == "external_event":
             try:
-                self._handle_external_event(window, eventObject)
+                self._handle_external_event(xWindow, EventObject)
             except Exception as e:
                 print(e)
             return True
