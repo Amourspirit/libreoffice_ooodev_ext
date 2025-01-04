@@ -21,6 +21,7 @@ class ConfigMeta(type):
 class BasicConfig(metaclass=ConfigMeta):
     def __init__(self, **kwargs) -> None:
         self._py_pkg_dir = str(kwargs["py_pkg_dir"])
+        self._lo_pip_dir = str(kwargs["lo_pip"])
         self._lo_identifier = str(kwargs["lo_identifier"])
         self._lo_implementation_name = str(kwargs["lo_implementation_name"])
         self._zipped_preinstall_pure = bool(kwargs["zipped_preinstall_pure"])
@@ -142,6 +143,15 @@ class BasicConfig(metaclass=ConfigMeta):
         The value for this property can be set in pyproject.toml (tool.oxt.token.lo_implementation_name)
         """
         return self._lo_implementation_name
+
+    @property
+    def lo_pip_dir(self) -> str:
+        """
+        Gets the Main Library directory name for this extension.
+
+        The value for this property can be set in pyproject.toml (tool.oxt.token.lo_pip)
+        """
+        return self._lo_pip_dir
 
     @property
     def no_pip_remove(self) -> Set[str]:

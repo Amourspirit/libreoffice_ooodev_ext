@@ -1,12 +1,16 @@
 from __future__ import annotations
+from typing import TYPE_CHECKING
 import pytest
 
 if __name__ == "__main__":
     pytest.main([__file__])
 
-
-from oxt.___lo_pip___.ver.rules.ver_rules import VerRules
-from oxt.___lo_pip___.ver.req_version import ReqVersion
+if TYPE_CHECKING:
+    from ...oxt.___lo_pip___.ver.rules.ver_rules import VerRules
+    from ...oxt.___lo_pip___.ver.req_version import ReqVersion
+else:
+    from oxt.___lo_pip___.ver.rules.ver_rules import VerRules
+    from oxt.___lo_pip___.ver.req_version import ReqVersion
 
 
 @pytest.mark.parametrize(
@@ -20,17 +24,17 @@ from oxt.___lo_pip___.ver.req_version import ReqVersion
         ("<=1.2.3", "<=1.2.3", "1.2.3"),
         ("!=1.2.3", "!=1.2.3", "1.2"),
         ("<> 1.2.3", "!=1.2.3", "2.2"),
-        ("^1.2", ">=1.2, <2.0.0", "1.5"),
-        ("~=1.2", ">=1.2, <1.3.0", "1.2.4"),
-        ("==2.*", ">=2, <3.0.0", "2.2.4"),
+        ("^1.2", ">=1.2.0, <2.0.0", "1.5"),
+        ("~=1.2", ">=1.2, <2.0.0", "1.2.4"),
+        ("==2.*", ">=2, <3.dev1", "2.2.4"),
         ("== 1.2.3", "==1.2.3", "1.2.3"),
         ("> 1.2.3", ">1.2.3", "1.2.4"),
         ("< 1.2.3", "<1.2.3", "1.2.2"),
         (">= 1.2.3", ">=1.2.3", "1.2.4"),
         ("<= 1.2.3", "<=1.2.3", "1.2.3"),
         ("!= 1.2.3", "!=1.2.3", "1.2"),
-        ("^ 1.2", ">=1.2, <2.0.0", "1.5"),
-        ("~= 1.2", ">=1.2, <1.3.0", "1.2.4"),
+        ("^ 1.2", ">=1.2.0, <2.0.0", "1.5"),
+        ("~= 1.2", ">=1.2, <2.0.0", "1.2.4"),
     ],
 )
 def test_rules(vstr: str, gstr: str, valid_str: str) -> None:
@@ -170,8 +174,8 @@ def test_expect_not_equal(installed_str: str, vstr: str, expected_result: bool) 
         ("1.999", ">=1.5, <2", True),
         ("1.5.2", "~=1.5", True),
         ("1.5.99", "~=1.5", True),
-        ("1.6.0", "~=1.5", False),
-        ("1.7", "~=1.5", False),
+        ("1.6.0", "~=1.5", True),
+        ("1.7", "~=1.5", True),
         ("1.5.2", "~=1.5, <2", True),
         ("1.5.2", "~=1.5, <2, !=1.5.1", True),
         ("1.5.2", "~=1.5, <2, !=1.5.2", False),

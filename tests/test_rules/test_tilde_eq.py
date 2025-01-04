@@ -5,19 +5,27 @@ if __name__ == "__main__":
     pytest.main([__file__])
 
 
-from oxt.___lo_pip___.ver.rules.tilde import Tilde
+from oxt.___lo_pip___.ver.rules.tilde_eq import TildeEq
 
 
 @pytest.mark.parametrize(
     "match",
     [
-        ("~1.0.0"),
-        ("~1.0"),
-        ("~0.0.1"),
+        ("~=1.0.0"),
+        ("~=1.0"),
+        ("~=0.0.1"),
+        ("~=0.1.post1"),
+        ("~=0.1.dev1"),
+        ("~=0.1.pre1"),
+        ("~=0.1post1"),
+        ("~=0.1dev1"),
+        ("~=0.1pre1"),
+        ("~=3.1a1"),
+        ("~=3.1-1"),
     ],
 )
 def test_is_match(match: str) -> None:
-    rule = Tilde(match)
+    rule = TildeEq(match)
     assert rule.get_is_match()
 
 
@@ -27,19 +35,17 @@ def test_is_match(match: str) -> None:
         ("==1.0.0"),
         ("!=1.0"),
         ("~=1"),
-        ("~=1.1"),
-        ("~1.1a1"),
         ("*=0.0.1"),
     ],
 )
 def test_is_not_match(match: str) -> None:
-    rule = Tilde(match)
+    rule = TildeEq(match)
     assert not rule.get_is_match()
 
 
 def test_get_version() -> None:
-    ver = "~1.2.3"
-    rule = Tilde(ver)
+    ver = "~=1.2.3"
+    rule = TildeEq(ver)
     assert rule.get_is_match()
     versions = rule.get_versions()
     assert len(versions) == 2
@@ -56,8 +62,8 @@ def test_get_version() -> None:
     pip_ver_str = rule.get_versions_str()
     assert pip_ver_str == ">=1.2.3, <1.3.0"
 
-    ver = "~1.2"
-    rule = Tilde(ver)
+    ver = "~=1.2"
+    rule = TildeEq(ver)
     assert rule.get_is_match()
     versions = rule.get_versions()
     assert len(versions) == 2
@@ -67,15 +73,15 @@ def test_get_version() -> None:
     assert versions[0].micro == 0
 
     assert versions[1].prefix == "<"
-    assert versions[1].major == 1
-    assert versions[1].minor == 3
+    assert versions[1].major == 2
+    assert versions[1].minor == 0
     assert versions[1].micro == 0
 
     pip_ver_str = rule.get_versions_str()
-    assert pip_ver_str == ">=1.2.0, <1.3.0"
+    assert pip_ver_str == ">=1.2, <2.0.0"
 
-    ver = "~1.1"
-    rule = Tilde(ver)
+    ver = "~=1.1"
+    rule = TildeEq(ver)
     assert rule.get_is_match()
     versions = rule.get_versions()
     assert len(versions) == 2
@@ -85,35 +91,17 @@ def test_get_version() -> None:
     assert versions[0].micro == 0
 
     assert versions[1].prefix == "<"
-    assert versions[1].major == 1
-    assert versions[1].minor == 2
+    assert versions[1].major == 2
+    assert versions[1].minor == 0
     assert versions[1].micro == 0
 
     pip_ver_str = rule.get_versions_str()
-    assert pip_ver_str == ">=1.1.0, <1.2.0"
-
-
-@pytest.mark.parametrize(
-    "ver,expect1,expect2",
-    [
-        pytest.param("~1.2.3", "1.2.3", "1.3.0", id="~1.2.3 low 1.2.3 hight 1.3.0"),
-        pytest.param("~1.2", "1.2.0", "1.3.0", id="~1.2 low 1.2.0 hight 1.3.0"),
-        pytest.param("~1", "1.0.0", "2.0.0", id="~1 low 1.0.0 hight 2.0.0"),
-    ],
-)
-def test_get_version2(ver: str, expect1: str, expect2: str) -> None:
-    # https://python-poetry.org/docs/dependency-specification/
-    rule = Tilde(ver)
-    assert rule.get_is_match()
-    versions = rule.get_versions()
-    assert len(versions) == 2
-    assert str(versions[0]) == expect1
-    assert str(versions[1]) == expect2
+    assert pip_ver_str == ">=1.1, <2.0.0"
 
 
 def test_get_version_is_valid() -> None:
-    ver = "~1.2.4"
-    rule = Tilde(ver)
+    ver = "~=1.2.4"
+    rule = TildeEq(ver)
     assert rule.get_is_match()
     assert rule.get_version_is_valid("1.2.4") == 0
     assert rule.get_version_is_valid("1.2.9") == 0
@@ -124,12 +112,30 @@ def test_get_version_is_valid() -> None:
 @pytest.mark.parametrize(
     "check_ver,vstr,result",
     [
-        ("1.2.4", "~1.2.4", 0),
-        ("1.2.5", "~1.2.4", 0),
+        ("1.2.4", "~=1.2.4", 0),
+        ("1.2.5", "~= 1.2.4", 0),
+        ("1.2rc1", "~=1.2.pre1", 0),
+        ("1.2rc1", "~=1.2.rc1", 0),
+        ("1.2rc1", "~=1.2.pre2", -1),
+        ("1.2rc2", "~=1.2.pre2", 0),
+        ("1.2dev3", "~=1.2.dev3", 0),
+        ("1.2dev1", "~=1.2dev2", -1),
+        (
+            "1.3dev3",
+            "~=1.2dev2",
+            0,
+        ),  # 1.3dev3 is less than 1.3.0 because it is a dev version
+        ("1.2post3", "~=1.2.post3", 0),
+        ("1.2post1", "~=1.2post2", -1),
+        ("1.2post3", "~=1.2post2", 0),
+        ("2.2", "~=1.2post2", 1),
+        ("1.2-3", "~=1.2post2", 0),
+        ("1.2-1", "~=1.2post2", -1),
+        ("2.2-3", "~=1.2post2", 1),
     ],
 )
 def test_get_version_is_valid_suffix(check_ver: str, vstr: str, result: int) -> None:
-    rule = Tilde(vstr)
+    rule = TildeEq(vstr)
     assert rule.get_is_match()
     assert rule.get_version_is_valid(check_ver) == result
 
@@ -137,12 +143,30 @@ def test_get_version_is_valid_suffix(check_ver: str, vstr: str, result: int) -> 
 @pytest.mark.parametrize(
     "check_ver,vstr,result",
     [
-        ("1.2.4", "~1.2.4", True),
-        ("1.2.5", "~ 1.2.4", True),
-        ("1.2.3", "~1.2.4", False),
+        ("1.2.4", "~=1.2.4", True),
+        ("1.2.5", "~= 1.2.4", True),
+        ("1.2.3", "~= 1.2.4", False),
+        ("1.2rc1", "~=1.2.pre1", True),
+        ("1.2rc1", "~=1.2.rc1", True),
+        ("1.2rc1", "~=1.2.pre2", False),
+        ("1.2rc2", "~=1.2.pre2", True),
+        ("1.2dev3", "~=1.2.dev3", True),
+        ("1.2dev1", "~=1.2dev2", False),
+        (
+            "1.3dev3",
+            "~=1.2dev2",
+            True,
+        ),  # 1.3dev3 is less than 1.3.0 becuase it is a dev version
+        ("1.2post3", "~=1.2.post3", True),
+        ("1.2post1", "~=1.2post2", False),
+        ("1.2post3", "~=1.2post2", True),
+        ("2.2", "~=1.2post2", False),
+        ("1.2-3", "~=1.2post2", True),
+        ("1.2-1", "~=1.2post2", False),
+        ("2.2-3", "~=1.2post2", False),
     ],
 )
 def test_get_installed_valid(check_ver: str, vstr: str, result: bool) -> None:
-    rule = Tilde(vstr)
+    rule = TildeEq(vstr)
     assert rule.get_is_match()
     assert rule.get_installed_is_valid(check_ver) == result

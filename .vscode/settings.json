@@ -103,6 +103,5 @@
         "endregion",
         "kargs",
         "lxml"
-    ],
-    "python.analysis.typeCheckingMode": "basic"
+    ]
 }

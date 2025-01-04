@@ -632,6 +632,15 @@ class Config(metaclass=Singleton):
         """
         return self._basic_config.extension_version
 
+    @property
+    def lo_pip_dir(self) -> str:
+        """
+        Gets the Main Library directory name for this extension.
+
+        The value for this property can be set in pyproject.toml (tool.oxt.token.lo_pip)
+        """
+        return self._basic_config.lo_pip_dir
+
     # endregion Properties
 
 
