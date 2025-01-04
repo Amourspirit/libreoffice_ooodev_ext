@@ -508,9 +508,7 @@ class ___lo_implementation_name___(unohelper.Base, XJob):
         """
         if ctx is None:
             ctx = uno.getComponentContext()
-        result = ctx.ServiceManager.createInstance(
-            "com.sun.star.util.PathSubstitution"
-        ).substituteVariables(  # type: ignore
+        result = ctx.ServiceManager.createInstance("com.sun.star.util.PathSubstitution").substituteVariables(  # type: ignore
             "$(user)", True
         )
         return uno.fileUrlToSystemPath(result) if as_sys_path else result
@@ -693,13 +691,13 @@ class ___lo_implementation_name___(unohelper.Base, XJob):
     def _import_on_load(self) -> None:
         try:
             if TYPE_CHECKING:
-                from .___lo_pip___.settings.load_settings import LoadSettings
+                from .___lo_pip___.settings.options import Options
             else:
-                from ___lo_pip___.settings.load_settings import LoadSettings
+                from ___lo_pip___.settings.options import Options
 
             self._logger.debug("Starting _import_on_load")
 
-            settings = LoadSettings()
+            settings = Options()
 
             if settings.load_ooo_dev:
                 with contextlib.suppress(ImportError):

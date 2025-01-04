@@ -25,7 +25,7 @@
             </prop>
             <prop oor:name="LogLevel" oor:type="xs:string">
                 <info>
-                    <desc>Loggging Level, NONE, DEBUG, INFO, WARNING, ERROR, CRITICAL</desc>
+                    <desc>Logging Level, NONE, DEBUG, INFO, WARNING, ERROR, CRITICAL</desc>
                 </info>
             </prop>
             <prop oor:name="LogFormat" oor:type="xs:string">
@@ -36,9 +36,11 @@
             <prop oor:name="LogAddConsole" oor:type="xs:boolean">
                 <info>
                     <desc>
-                        Determins if a logging console is to be added.
-                        This can be useful log to the APSO terminal and any other console that LibreOffice is started from.
-                        For production this value should be false as it may have some unintended side effects.
+                        Determines if a logging console is to be added.
+                        This can be useful log to the APSO terminal and any other console that
+                        LibreOffice is started from.
+                        For production this value should be false as it may have some unintended
+                        side effects.
                     </desc>
                 </info>
             </prop>
@@ -117,18 +119,27 @@
             <prop oor:name="DelayStartup" oor:type="xs:boolean">
                 <info>
                     <desc>
-                        Determins if Delayed startup is used before installing any pip packages.
-                        If set to true, then the extension will wait until a window is available before starting instalation.
-                        This has the advantage of allowing the user to see the progress of the installation via progress dialogs.
+                        Determines if Delayed startup is used before installing any pip packages.
+                        If set to true, then the extension will wait until a window is available
+                        before starting installation.
+                        This has the advantage of allowing the user to see the progress of the
+                        installation via progress dialogs.
                     </desc>
                 </info>
             </prop>
         </group>
         <group oor:name="Options">
+            <prop oor:name="PackageRequirement" oor:type="xs:string">
+                <info>
+                    <desc>
+                        Determines the package version that is to be installed.
+                    </desc>
+                </info>
+            </prop>
             <prop oor:name="OptionLoadOooDev" oor:type="xs:boolean">
                 <info>
                     <desc>
-                        Determins if OooDev is loaded when LibreOffice is started.
+                        Determines if OooDev is loaded when LibreOffice is started.
                     </desc>
                 </info>
             </prop>

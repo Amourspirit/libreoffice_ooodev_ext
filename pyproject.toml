@@ -1,9 +1,9 @@
 [tool.oxt.requirements]
-ooo-dev-tools = ">=0.49.0"
+ooo-dev-tools = ">=0.50.0"
 
 [project]
 name = "ooodev-ext"  
-version = "0.49.0"
+version = "0.50.0"
 description = "Template for creating python projects for LibreOffice"
 readme = "README.md"
 requires-python = ">=3.8"
@@ -38,6 +38,7 @@ uninstall_on_update = true # https://tinyurl.com/ymeh4c9j#uninstall_on_update un
 install_on_no_uninstall_permission = true # https://tinyurl.com/ymeh4c9j#install_on_no_uninstall_permission
 no_pip_remove = ["pip", "setuptools", "wheel"]
 unload_after_install = true
+package_name="ooo-dev-tools" # specific to this project. If this project is cloned and renamed, this should be changed to make a new package easily.
 
 [tool.oxt.token]
 pip_wheel_url = "https://files.pythonhosted.org/packages/50/c2/e06851e8cc28dcad7c155f4753da8833ac06a5c704c109313b8d5a62968a/pip-23.2.1-py3-none-any.whl"

@@ -10,7 +10,6 @@ import platform
 import site
 
 from .oxt_logger.logger_config import LoggerConfig
-from .meta.singleton import Singleton
 from .basic_config import BasicConfig
 from .oxt_logger.oxt_logger import OxtLogger
 
@@ -34,16 +33,33 @@ IS_LINUX = OS == "Linux"
 # region Config Class
 
 
-class Config(metaclass=Singleton):
+class Config:
     """
     Singleton Configuration Class
 
     Generally speaking this class is only used internally.
     """
 
+    _instance = None
+
+    def __new__(cls, *args, **kwargs):  # noqa: ANN204
+        if cls._instance is None:
+            cls._instance = super(Config, cls).__new__(cls, *args, **kwargs)
+            cls._instance._is_init = False
+            cls._instance._requirements_set = False
+            cls._instance.__init__()
+        if not cls._instance._requirements_set:
+            # _set_requirements() needs VerRules which in turn needs packaging.
+            # Because packaging is not available while the extension is being installed this is done here.
+            # After extension is installed, packaging will be available.
+            cls._instance._requirements_set = cls._instance._set_requirements(cls._instance._requirements)
+        return cls._instance
+
     # region Init
 
-    def __init__(self):
+    def __init__(self) -> None:
+        if getattr(self, "_is_init", False):
+            return
         if not TYPE_CHECKING:
             from .lo_util import Session
             from .info import ExtensionInfo
@@ -59,6 +75,8 @@ class Config(metaclass=Singleton):
             self._log_format = logger_config.log_format
             self._basic_config = BasicConfig()
             self._logger.debug("Basic config initialized")
+            self._requirements = self._basic_config.requirements
+            self._requirements_set = self._set_requirements(self._requirements)
             generals_settings = GeneralSettings()
             self._logger.debug("General Settings initialized")
             self._url_pip = generals_settings.url_pip
@@ -114,12 +132,60 @@ class Config(metaclass=Singleton):
             self._logger.error(f"Error initializing config: {err}", exc_info=True)
             raise
         self._logger.debug("Config initialized")
+        self._is_init = True
 
     # endregion Init
 
     # region Methods
+    def _set_requirements(self, req: Dict[str, str]) -> bool:
+        if self._basic_config.package_name not in req:
+            self._logger.debug(
+                "%s requirement not part of pyproject.toml tool.oxt.requirements",
+                self._basic_config.package_name,
+            )
+        try:
+            from .settings.options import Options
+            from .ver.rules.ver_rules import VerRules
+        except ImportError:
+            return False
 
-    def join(self, *paths: str):
+        options = Options()
+        package_ver = options.package_requirement
+        if not package_ver:
+            self._logger.debug(
+                "No requirement set in extension options for %s package",
+                self._basic_config.package_name,
+            )
+            return True
+        else:
+            self._logger.debug(
+                "Setting from extension options - %s requirement: '%s'",
+                self._basic_config.package_name,
+                package_ver,
+            )
+        ver_rules = VerRules()
+        matched_rules = ver_rules.get_matched_rules(package_ver)
+        ver_strings = []
+        for rule in matched_rules:
+            ver_strings.append(rule.get_versions_str())
+
+        if ver_strings:
+            txt_ver = ",".join(ver_strings)
+            self._logger.debug(
+                "Setting from LO options - %s requirement: '%s'",
+                self._basic_config.package_name,
+                txt_ver,
+            )
+            req[self._basic_config.package_name] = txt_ver
+        else:
+            self._logger.error(
+                "Invalid %s requirement: %s",
+                self._basic_config.package_name,
+                package_ver,
+            )
+        return True
+
+    def join(self, *paths: str) -> str:
         return str(Path(paths[0]).joinpath(*paths[1:]))
 
     def _set_extension_installs(self) -> None:
