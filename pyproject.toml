@@ -1,24 +1,25 @@
 [tool.oxt.requirements]
 ooo-dev-tools = ">=0.49.0"
 
-[tool.poetry]
-name = "OOO Development Tools Extension"
+[project]
+name = "ooodev-ext"  
 version = "0.49.0"
 description = "Template for creating python projects for LibreOffice"
-authors = [
-    ":Barry-Thomas-Paul: Moss <bigbytetech@gmail.com>"
-]
-license = "MIT"
 readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+keywords = ["ooodev", "OOO Dev Tools", "libreoffice","uno", "pyuno"]
+dependencies = []
+authors = [
+    {name = ":Barry-Thomas-Paul: Moss", email = "ooodev.tremble198@passfwd.com"}]
 packages = [
-    { include = "src" }
+    { include = "oooscript" }
 ]
-
 
 [tool.oxt.config]
 auto_install_in_site_packages = true
 build_dir = "build"
-dist_dir = "dist"
+dist_dir = "tmp_dist"
 install_wheel = false
 oxt_name = "OooDev"
 py_pkg_dir = "py_pkgs"
@@ -53,7 +54,7 @@ update_url_xml = "https://raw.githubusercontent.com/Amourspirit/libreoffice_oood
 url_pip = 'https://bootstrap.pypa.io/get-pip.py'
 log_file = "ooodev_tools_install.log"
 log_name = "OOO PIP Installer"
-log_level = "INFO" # NONE, DEBUG, INFO, WARNING, ERROR, CRITICAL
+log_level = "DEBUG" # NONE, DEBUG, INFO, WARNING, ERROR, CRITICAL
 log_format = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 log_add_console = false # should be false for production
 lo_pip = "ooodev_tools_pip"
@@ -156,26 +157,34 @@ python = "^3.8"
 ooo-dev-tools = ">=0.49.0"
 
 
-[tool.poetry.group.dev.dependencies]
-types-scriptforge = ">=2.0.1"
-pytest = "^7.4.0"
-pytest-dotenv = "^0.5.2"
-black = ">=24.3.0"
-oooscript = "^1.1.3"
-toml = "^0.10.2"
-oooenv = "^0.2.2"
-lxml = "^4.9.3"
+[dependency-groups]
+dev = [
+    "lxml>=5.3.0",
+    "packaging>=24.2",
+    "pytest-mock>=3.14.0",
+    "pytest>=8.3.4",
+    "ruff>=0.8.1",
+    "toml>=0.10.2",
+    "typing-extensions>=4.12.2",
+    "oooenv>=0.2.4",
+    "pytest-dotenv>=0.5.2",
+    "oooscript>=2.1.1",
+]
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
+[tool.hatch.build]
+include = [
+    "build/**/*",
+]
 
 [tool.ruff]
-extended-select=["ANN", "C4", "N", "SIM", "TCH"]
-ignore=[]
-show-fixes=true
-target="py37"
+extended-select = ["ANN", "C4", "N", "SIM", "TCH"]
+ignore = ["E501"]
+show-fixes = true
+target = "py38"
 
 [tool.pylint.'MESSAGES CONTROL']
 max-line-length = 120
@@ -189,9 +198,8 @@ include = ["src"]
 reportMissingModuleSource = false
 
 [tool.pytest.ini_options]
-testpaths = [
-    "tests",
-]
+testpaths = ["tests"]
+
 markers = [
     "skip_headless: skips a test in headless mode",
     "skip_not_headless_os: skips a test in GUI mode for give os"

@@ -17,12 +17,16 @@ class Token(metaclass=Singleton):
         self._tokens: Dict[str, str] = {}
         for token, replacement in tokens.items():
             self._tokens[f"___{token}___"] = replacement
-        self._tokens["___version___"] = str(cfg["tool"]["poetry"]["version"])
-        self._tokens["___license___"] = str(cfg["tool"]["poetry"]["license"])
+        self._tokens["___version___"] = str(cfg["project"]["version"])
+        self._tokens["___license___"] = str(cfg["project"]["license"])
         self._tokens["___oxt_name___"] = str(cfg["tool"]["oxt"]["config"]["oxt_name"])
         self._tokens["___dist_dir___"] = str(cfg["tool"]["oxt"]["config"]["dist_dir"])
-        self._tokens["___update_file___"] = str(cfg["tool"]["oxt"]["config"]["update_file"])
-        self._tokens["___py_pkg_dir___"] = str(cfg["tool"]["oxt"]["config"]["py_pkg_dir"])
+        self._tokens["___update_file___"] = str(
+            cfg["tool"]["oxt"]["config"]["update_file"]
+        )
+        self._tokens["___py_pkg_dir___"] = str(
+            cfg["tool"]["oxt"]["config"]["py_pkg_dir"]
+        )
         authors = self._get_authors(cfg)
         self._tokens["___authors___"] = ", ".join(authors)
         self._tokens["___contributors___"] = "\n".join(authors)
@@ -54,7 +58,9 @@ class Token(metaclass=Singleton):
             if key not in cfg:
                 raise ValueError(f"Key '{key}' not found")
             if not isinstance(cfg[key], value):
-                raise ValueError(f"Key '{key}' must be {value.__name__}, got: {type(cfg[key]).__name__}")
+                raise ValueError(
+                    f"Key '{key}' must be {value.__name__}, got: {type(cfg[key]).__name__}"
+                )
             if value is str and not cfg[key]:
                 raise ValueError(f"Key '{key}' is empty")
 
@@ -66,7 +72,9 @@ class Token(metaclass=Singleton):
             if key not in cfg:
                 raise ValueError(f"Key '{key}' not found")
             if not isinstance(cfg[key], value):
-                raise ValueError(f"Key '{key}' must be {value.__name__}, got: {type(cfg[key]).__name__}")
+                raise ValueError(
+                    f"Key '{key}' must be {value.__name__}, got: {type(cfg[key]).__name__}"
+                )
 
         levels = {"none", "debug", "info", "warning", "error", "critical"}
         value = str(cfg.get("log_level", "")).lower()
@@ -139,9 +147,21 @@ class Token(metaclass=Singleton):
 
     def _get_authors(self, cfg: Dict[str, Any]) -> List[str]:
         """Returns the authors."""
-        authors = cast(List[str], cfg["tool"]["poetry"]["authors"])
-        results: List[str] = [author.split("<")[0].strip() for author in authors]
+        authors = cast(List[Dict[str, str]], cfg["project"]["authors"])
+        results = []
+        for author in authors:
+            if "name" in author:
+                results.append(author["name"])
         return results
+
+    def escape_xml(self, s: str) -> str:
+        return (
+            s.replace("&", "&amp;")
+            .replace("<", "&lt;")
+            .replace(">", "&gt;")
+            .replace('"', "&quot;")
+            .replace("'", "&apos;")
+        )
 
     # endregion Methods
 
