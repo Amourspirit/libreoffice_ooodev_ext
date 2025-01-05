@@ -24,9 +24,7 @@ from ..message_dialog import MessageDialog
 
 if TYPE_CHECKING:
     from com.sun.star.awt import UnoControlDialog  # type: ignore # service
-    from com.sun.star.awt import UnoControlEdit  # type: ignore # service
     from com.sun.star.awt import UnoControlCheckBoxModel  # type: ignore
-    from com.sun.star.awt import UnoControlFixedText  # type: ignore
     from com.sun.star.awt import UnoControlButton  # type: ignore # service
 
 
