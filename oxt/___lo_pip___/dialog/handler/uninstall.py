@@ -229,13 +229,6 @@ class OptionsDialogUninstallHandler(unohelper.Base, XContainerWindowEventHandler
     def bool_to_state(self, value: bool) -> int:
         return int(value)
 
-    def _config_writer(self, settings: SettingsT) -> None:
-        try:
-            cfg = Configuration()
-            cfg.save_configuration(self._config_node, settings)
-        except Exception as e:
-            raise e
-
     @property
     def resource_resolver(self) -> ResourceResolver:
         return self._resource_resolver
