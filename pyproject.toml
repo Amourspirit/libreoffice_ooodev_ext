@@ -19,7 +19,7 @@ packages = [
 [tool.oxt.config]
 auto_install_in_site_packages = true
 build_dir = "build"
-dist_dir = "tmp_dist"
+dist_dir = "dist"
 install_wheel = false
 oxt_name = "OooDev"
 py_pkg_dir = "py_pkgs"
@@ -55,7 +55,7 @@ update_url_xml = "https://raw.githubusercontent.com/Amourspirit/libreoffice_oood
 url_pip = 'https://bootstrap.pypa.io/get-pip.py'
 log_file = "ooodev_tools_install.log"
 log_name = "OOO PIP Installer"
-log_level = "DEBUG" # NONE, DEBUG, INFO, WARNING, ERROR, CRITICAL
+log_level = "INFO" # NONE, DEBUG, INFO, WARNING, ERROR, CRITICAL
 log_format = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 log_add_console = false # should be false for production
 lo_pip = "ooodev_tools_pip"
