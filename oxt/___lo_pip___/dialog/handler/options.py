@@ -60,7 +60,7 @@ class OptionsDialogHandler(unohelper.Base, XContainerWindowEventHandler):
         self._config = BasicConfig()
         self._resource_resolver = ResourceResolver(self.ctx)
         self._config_node = f"/{self._config.lo_implementation_name}.Settings/Options"
-        self._window_name = "options"
+        self._window_name = "options"  # options.xdl file name
         self._settings = Settings()
         self._load_ooo_dev = False
         self._load_ooo_dev_original = False

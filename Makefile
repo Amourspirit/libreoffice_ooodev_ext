@@ -12,7 +12,8 @@ create_build_dir:
 	mkdir -p tmp
 
 diff: create_build_dir
-	git diff > ./tmp/changes_since_last_commit.diff
+    # https://stackoverflow.com/questions/855767/can-i-use-git-diff-on-untracked-files
+	git diff HEAD > ./tmp/changes_since_last_commit.diff
 
 diff_sum: create_build_dir
-	git diff --compact-summary > ./tmp/summary_since_last_commit.diff
+	git diff --compact-summary HEAD > ./tmp/summary_since_last_commit.diff

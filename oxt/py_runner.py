@@ -778,11 +778,19 @@ g_ImplementationHelper.addImplementation(
 
 if TYPE_CHECKING:
     from .___lo_pip___.dialog.handler import options as dialog_options
+    from .___lo_pip___.dialog.handler import uninstall as dialog_uninstall
 else:
     from ___lo_pip___.dialog.handler import options as dialog_options
+    from ___lo_pip___.dialog.handler import uninstall as dialog_uninstall
 
 g_ImplementationHelper.addImplementation(
     dialog_options.OptionsDialogHandler, dialog_options.IMPLEMENTATION_NAME, (dialog_options.IMPLEMENTATION_NAME,)
+)
+
+g_ImplementationHelper.addImplementation(
+    dialog_uninstall.OptionsDialogUninstallHandler,
+    dialog_uninstall.IMPLEMENTATION_NAME,
+    (dialog_uninstall.IMPLEMENTATION_NAME,),
 )
 
 # endregion Implementation
