@@ -14,7 +14,6 @@ from com.sun.star.awt.MessageBoxType import QUERYBOX, INFOBOX, ERRORBOX  # type:
 from ...basic_config import BasicConfig
 from ...lo_util.resource_resolver import ResourceResolver
 
-from ...lo_util.configuration import Configuration, SettingsT
 from ...settings.settings import Settings
 from ...oxt_logger import OxtLogger
 
