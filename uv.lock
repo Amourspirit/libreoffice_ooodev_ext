@@ -151,7 +151,7 @@ wheels = [
 
 [[package]]
 name = "ooodev-ext"
-version = "0.50.0"
+version = "0.51.1"
 source = { editable = "." }
 
 [package.dev-dependencies]
