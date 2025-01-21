@@ -1,19 +1,20 @@
 [tool.oxt.requirements]
-ooo-dev-tools = ">=0.49.0"
+ooo-dev-tools = ">=0.51.1"
 
-[tool.poetry]
-name = "OOO Development Tools Extension"
-version = "0.49.0"
+[project]
+name = "ooodev-ext"  
+version = "0.51.1"
 description = "Template for creating python projects for LibreOffice"
-authors = [
-    ":Barry-Thomas-Paul: Moss <bigbytetech@gmail.com>"
-]
-license = "MIT"
 readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+keywords = ["ooodev", "OOO Dev Tools", "libreoffice","uno", "pyuno"]
+dependencies = []
+authors = [
+    {name = ":Barry-Thomas-Paul: Moss", email = "ooodev.tremble198@passfwd.com"}]
 packages = [
-    { include = "src" }
+    { include = "oooscript" }
 ]
-
 
 [tool.oxt.config]
 auto_install_in_site_packages = true
@@ -37,6 +38,7 @@ uninstall_on_update = true # https://tinyurl.com/ymeh4c9j#uninstall_on_update un
 install_on_no_uninstall_permission = true # https://tinyurl.com/ymeh4c9j#install_on_no_uninstall_permission
 no_pip_remove = ["pip", "setuptools", "wheel"]
 unload_after_install = true
+package_name="ooo-dev-tools" # specific to this project. If this project is cloned and renamed, this should be changed to make a new package easily.
 
 [tool.oxt.token]
 pip_wheel_url = "https://files.pythonhosted.org/packages/50/c2/e06851e8cc28dcad7c155f4753da8833ac06a5c704c109313b8d5a62968a/pip-23.2.1-py3-none-any.whl"
@@ -151,31 +153,44 @@ windows = []
 [tool.oxt.preinstall.pure]
 # verr = ">=1.1.2"
 
-[tool.poetry.dependencies]
-python = "^3.8"
-ooo-dev-tools = ">=0.49.0"
+[project.urls]
+Extension = "https://extensions.libreoffice.org/en/extensions/show/41700"
+Repository = "https://github.com/Amourspirit/libreoffice_ooodev_ext"
+Issues = "https://github.com/Amourspirit/libreoffice_ooodev_ext/issues"
+Documentation = "https://python-ooo-dev-tools.readthedocs.io/en/latest/"
 
 
-[tool.poetry.group.dev.dependencies]
-types-scriptforge = ">=2.0.1"
-pytest = "^7.4.0"
-pytest-dotenv = "^0.5.2"
-black = ">=24.3.0"
-oooscript = "^1.1.3"
-toml = "^0.10.2"
-oooenv = "^0.2.2"
-lxml = "^4.9.3"
+[dependency-groups]
+dev = [
+    "lxml>=5.3.0",
+    "packaging>=24.2",
+    "pytest-mock>=3.14.0",
+    "pytest>=8.3.4",
+    "ruff>=0.8.1",
+    "toml>=0.10.2",
+    "typing-extensions>=4.12.2",
+    "oooenv>=0.2.4",
+    "pytest-dotenv>=0.5.2",
+    "oooscript>=2.1.1",
+]
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
+[tool.hatch.build]
+include = [
+    "build/**/*",
+]
 
 [tool.ruff]
-extended-select=["ANN", "C4", "N", "SIM", "TCH"]
-ignore=[]
-show-fixes=true
-target="py37"
+# https://docs.astral.sh/ruff/configuration/
+line-length = 119
+indent-width = 4
+select = ["ANN", "C4", "N", "SIM"]
+ignore = ["E501"]
+show-fixes = true
+target-version = "py38"
 
 [tool.pylint.'MESSAGES CONTROL']
 max-line-length = 120
@@ -189,9 +204,8 @@ include = ["src"]
 reportMissingModuleSource = false
 
 [tool.pytest.ini_options]
-testpaths = [
-    "tests",
-]
+testpaths = ["tests"]
+
 markers = [
     "skip_headless: skips a test in headless mode",
     "skip_not_headless_os: skips a test in GUI mode for give os"

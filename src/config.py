@@ -25,15 +25,17 @@ class Config(metaclass=Singleton):
         self._dist_dir_name = token.process(cast(str, cfg_meta["dist_dir"]))
         self._otx_name = token.process(cast(str, cfg_meta["oxt_name"]))
         self._update_file = token.process(cast(str, cfg_meta["update_file"]))
-        self._ver_str = cast(str, cfg["tool"]["poetry"]["version"])
-        self._license = cast(str, cfg["tool"]["poetry"]["license"])
+        self._ver_str = cast(str, cfg["project"]["version"])
+        self._license = cast(str, cfg["project"]["license"])
         self._token_file_ext: Set[str] = set(cast(List, cfg_meta["token_file_ext"]))
         self._py_pkg_dir = cast(str, cfg_meta["py_pkg_dir"])
         self._zip_preinstall_pure = cast(bool, cfg_meta["zip_preinstall_pure"])
 
         self._default_locale = cast(List[str], cfg_meta["default_locale"])
         self._resource_dir_name = cast(str, cfg_meta["resource_dir_name"])
-        self._resource_properties_prefix = cast(str, cfg_meta["resource_properties_prefix"])
+        self._resource_properties_prefix = cast(
+            str, cfg_meta["resource_properties_prefix"]
+        )
 
         self._validate()
         self._has_locals = self._get_has_locals()

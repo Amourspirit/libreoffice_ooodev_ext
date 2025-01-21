@@ -21,6 +21,7 @@ class ConfigMeta(type):
 class BasicConfig(metaclass=ConfigMeta):
     def __init__(self, **kwargs) -> None:
         self._py_pkg_dir = str(kwargs["py_pkg_dir"])
+        self._lo_pip_dir = str(kwargs["lo_pip"])
         self._lo_identifier = str(kwargs["lo_identifier"])
         self._lo_implementation_name = str(kwargs["lo_implementation_name"])
         self._zipped_preinstall_pure = bool(kwargs["zipped_preinstall_pure"])
@@ -44,6 +45,10 @@ class BasicConfig(metaclass=ConfigMeta):
         if "requirements" not in kwargs:
             kwargs["requirements"] = {}
         self._requirements: Dict[str, str] = dict(**kwargs["requirements"])
+
+        # region Project Specific
+        self._package_name = str(kwargs["package_name"])
+        # endregion Project Specific
 
     # region Properties
     @property
@@ -144,6 +149,15 @@ class BasicConfig(metaclass=ConfigMeta):
         return self._lo_implementation_name
 
     @property
+    def lo_pip_dir(self) -> str:
+        """
+        Gets the Main Library directory name for this extension.
+
+        The value for this property can be set in pyproject.toml (tool.oxt.token.lo_pip)
+        """
+        return self._lo_pip_dir
+
+    @property
     def no_pip_remove(self) -> Set[str]:
         """
         Gets the pip packages that are not allowed to be removed.
@@ -162,6 +176,15 @@ class BasicConfig(metaclass=ConfigMeta):
         The value for this property can be set in pyproject.toml (tool.oxt.token.oxt_name)
         """
         return self._oxt_name
+
+    @property
+    def package_name(self) -> str:
+        """
+        Gets the package name for the project. Something like ``ooo-dev-tools``.
+
+        The value for this property can be set in pyproject.toml (tool.oxt.config.package_name)
+        """
+        return self._package_name
 
     @property
     def py_pkg_dir(self) -> str:

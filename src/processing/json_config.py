@@ -4,6 +4,7 @@ from pathlib import Path
 import json
 import toml
 
+from oxt.___lo_pip___.ver.req_version import ReqVersion
 from ..meta.singleton import Singleton
 from ..config import Config
 from .token import Token
@@ -22,7 +23,8 @@ class JsonConfig(metaclass=Singleton):
             self._zip_preinstall_pure = False
         try:
             self._auto_install_in_site_packages = cast(
-                bool, self._cfg["tool"]["oxt"]["config"]["auto_install_in_site_packages"]
+                bool,
+                self._cfg["tool"]["oxt"]["config"]["auto_install_in_site_packages"],
             )
         except Exception:
             self._auto_install_in_site_packages = False
@@ -71,7 +73,8 @@ class JsonConfig(metaclass=Singleton):
 
         try:
             self._install_on_no_uninstall_permission = cast(
-                bool, self._cfg["tool"]["oxt"]["config"]["install_on_no_uninstall_permission"]
+                bool,
+                self._cfg["tool"]["oxt"]["config"]["install_on_no_uninstall_permission"],
             )
         except Exception:
             self._install_on_no_uninstall_permission = True
@@ -87,9 +90,21 @@ class JsonConfig(metaclass=Singleton):
             self._unload_after_install = True
 
         try:
-            self._extension_version = cast(str, self._cfg["tool"]["poetry"]["version"])
+            self._extension_version = cast(str, self._cfg["project"]["version"])
         except Exception:
             self._extension_version = ""
+
+        # region Requirements Rule
+        # Access a specific table
+        try:
+            self._py_packages = cast(List[Dict[str, str]], self._cfg["tool"]["oxt"]["py_packages"])
+        except Exception:
+            self._py_packages = []
+        # endregion Requirements Rule
+
+        # region Project Specific
+        self._package_name = cast(str, self._cfg["tool"]["oxt"]["config"]["package_name"])
+        # endregion Project Specific
 
         self._validate()
         self._warnings()
@@ -103,6 +118,7 @@ class JsonConfig(metaclass=Singleton):
         json_config["lo_identifier"] = token.get_token_value("lo_identifier")
         json_config["lo_implementation_name"] = token.get_token_value("lo_implementation_name")
         json_config["oxt_name"] = token.get_token_value("oxt_name")
+        json_config["lo_pip"] = token.get_token_value("lo_pip")
 
         json_config["zipped_preinstall_pure"] = self._zip_preinstall_pure
         json_config["auto_install_in_site_packages"] = self._auto_install_in_site_packages
@@ -123,6 +139,14 @@ class JsonConfig(metaclass=Singleton):
         json_config["no_pip_remove"] = self._no_pip_remove
         json_config["install_on_no_uninstall_permission"] = self._install_on_no_uninstall_permission
         json_config["extension_version"] = self._extension_version
+
+        # region Requirements Rule
+        json_config["py_packages"] = self._py_packages
+        # endregion Requirements Rule
+
+        # region Project Specific
+        json_config["package_name"] = self._package_name
+        # endregion Project Specific
 
         # save the file
         with open(json_config_path, "w", encoding="utf-8") as f:
@@ -150,6 +174,49 @@ class JsonConfig(metaclass=Singleton):
             self._install_on_no_uninstall_permission, bool
         ), "_install_on_no_uninstall_permission must be a bool"
         assert self._extension_version.count(".") == 2, "extension_version must contain two periods"
+
+        # region Requirements Rule
+        platforms = {"linux", "macos", "win", "flatpak", "snap", "all"}
+        restrictions = {"<", "<=", "==", "!=", ">", ">=", "^", "~", "~="}
+        for pkg in self._py_packages:
+            assert isinstance(pkg, dict), "py_packages must be a list of dicts"
+            assert "name" in pkg, "py_packages must contain a 'name' key"
+            assert "version" in pkg, "py_packages must contain a 'version' key"
+            assert isinstance(pkg["name"], str), "py_packages name must be a string"
+            assert isinstance(pkg["version"], str), "py_packages ver must be a string"
+            if "platforms" in pkg:
+                assert isinstance(pkg["platforms"], list), "py_packages platforms must be a list"
+                for platform in pkg["platforms"]:
+                    assert isinstance(platform, str), "py_packages platforms must be a list of strings"
+                    assert (
+                        platform in platforms
+                    ), "py_packages platforms must be in ['linux', 'macos', 'win', 'flatpak', 'snap', 'all']"
+
+            if "ignore_platforms" in pkg:
+                assert isinstance(pkg["ignore_platforms"], list), "py_packages platforms must be a list"
+                for platform in pkg["ignore_platforms"]:
+                    assert isinstance(platform, str), "py_packages ignore_platforms must be a list of strings"
+                    assert (
+                        platform in platforms
+                    ), "py_packages ignore_platforms must be in ['linux', 'macos', 'win', 'flatpak', 'snap', 'all']"
+            if "python_versions" in pkg:
+                assert isinstance(pkg["python_versions"], list), "py_packages python_versions must be a list"
+                for py_ver in pkg["python_versions"]:
+                    assert isinstance(py_ver, str), "py_packages python_versions must be a list of strings"
+                    assert len(py_ver) != 0, "py_packages python_versions must be not be an empty string"
+                    try:
+                        # validate python version by converting to ReqVersion
+                        py_ver = ReqVersion(py_ver)
+                    except Exception as err:
+                        raise Exception(f"Error in py_packages python_versions: {err}") from err
+
+            if "restriction" in pkg:
+                assert isinstance(pkg["restriction"], str), "py_packages python_versions must be a list"
+                assert (
+                    pkg["restriction"] in restrictions
+                ), "py_packages restriction must be in ['<', '<=', '==', '!=', '>', '>=', '^', '~', '~=']"
+
+        # endregion Requirements Rule
 
     def _warnings(self) -> None:
         warnings = []

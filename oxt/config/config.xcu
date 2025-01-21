@@ -69,6 +69,9 @@
     </prop>
   </node>
   <node oor:name="Options">
+    <prop oor:name="PackageRequirement" oor:type="xs:string">
+      <value></value>
+    </prop>
     <prop oor:name="OptionLoadOooDev" oor:type="xs:boolean">
       <value>false</value>
     </prop>
