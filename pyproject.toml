@@ -1,9 +1,9 @@
 [tool.oxt.requirements]
-ooo-dev-tools = ">=0.52.3"
+ooo-dev-tools = ">=0.52.4"
 
 [project]
 name = "ooodev-ext"  
-version = "0.52.3"
+version = "0.52.4"
 description = "Template for creating python projects for LibreOffice"
 readme = "README.md"
 requires-python = ">=3.8"
