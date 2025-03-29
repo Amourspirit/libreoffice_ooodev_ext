@@ -3,7 +3,7 @@ ooo-dev-tools = ">=0.52.4"
 
 [project]
 name = "ooodev-ext"  
-version = "0.52.4"
+version = "0.53.2"
 description = "Template for creating python projects for LibreOffice"
 readme = "README.md"
 requires-python = ">=3.8"
@@ -11,7 +11,7 @@ license = "MIT"
 keywords = ["ooodev", "OOO Dev Tools", "libreoffice","uno", "pyuno"]
 dependencies = []
 authors = [
-    {name = ":Barry-Thomas-Paul: Moss", email = "ooodev.tremble198@passfwd.com"}]
+    {name = ":Barry-Thomas-Paul: Moss", email = "ooodevtools@pm.amourspirit.net"}]
 packages = [
     { include = "oooscript" }
 ]
